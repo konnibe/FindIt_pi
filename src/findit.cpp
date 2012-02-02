@@ -801,7 +801,7 @@ void MainDialog::loadData()
 	TiXmlElement* pnode  =  hRoot.FirstChild( "LocationsColumnWidth" ).FirstChild().Element();
 
 	int colWidth;
-	for( ; ; pnode=pnode->NextSiblingElement())
+	for( ; pnode; pnode=pnode->NextSiblingElement())
 		{
 			for(int i = 0; i < this->m_gridLocations->GetNumberCols(); i++)
 			{
@@ -814,7 +814,7 @@ void MainDialog::loadData()
 
 	wxString data;
 	int lastRow;
-	for( ; ; pnode=pnode->NextSiblingElement())
+	for( ; pnode; pnode=pnode->NextSiblingElement())
 		{
 			this->m_gridLocations->AppendRows();
 			lastRow = this->m_gridLocations->GetNumberRows()-1;			
@@ -855,7 +855,7 @@ void MainDialog::loadData()
 
 	pnode  =  hRoot.FirstChild( "UnitsRowData" ).FirstChild().Element();
 
-	for( ; ; pnode=pnode->NextSiblingElement())
+	for( ; pnode; pnode=pnode->NextSiblingElement())
 		{
 			this->m_gridUnits->AppendRows();
 			lastRow = this->m_gridUnits->GetNumberRows()-1;			
@@ -868,7 +868,7 @@ void MainDialog::loadData()
 /////////// Material //////////////	
 	pnode  =  hRoot.FirstChild( "MaterialColumnWidth" ).FirstChild().Element();
 
-	for( ; ; pnode=pnode->NextSiblingElement())
+	for( ; pnode; pnode=pnode->NextSiblingElement())
 		{
 			for(int i = 0; i < this->m_gridMaterial->GetNumberCols(); i++)
 			{
@@ -879,7 +879,7 @@ void MainDialog::loadData()
 
 	pnode  =  hRoot.FirstChild( "MaterialRowData" ).FirstChild().Element();
 
-	for( ; ; pnode=pnode->NextSiblingElement())
+	for( ; pnode; pnode=pnode->NextSiblingElement())
 		{
 			lastRow = this->addLineMaterial();
 			
@@ -893,7 +893,7 @@ void MainDialog::loadData()
 /////////// Provisions //////////////	
 	pnode  =  hRoot.FirstChild( "ProvisionsColumnWidth" ).FirstChild().Element();
 
-	for( ; ; pnode=pnode->NextSiblingElement())
+	for( ; pnode; pnode=pnode->NextSiblingElement())
 		{
 			for(int i = 0; i < this->m_gridFood->GetNumberCols(); i++)
 			{
@@ -904,7 +904,7 @@ void MainDialog::loadData()
 
 	pnode  =  hRoot.FirstChild( "ProvisionsRowData" ).FirstChild().Element();
 
-	for( ; ; pnode=pnode->NextSiblingElement())
+	for( ; pnode; pnode=pnode->NextSiblingElement())
 		{
 			lastRow = this->addLineFood();
 			
