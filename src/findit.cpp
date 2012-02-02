@@ -429,7 +429,7 @@ bool MainDialog::deleteGridRow(int key, wxGrid* grid)
 {
 	if(key != WXK_DELETE) return false;
 
-	int* lastRow;
+	int* lastRow = 0;
     int col;
 
 	if(grid == this->m_gridMaterial)
@@ -456,11 +456,11 @@ bool MainDialog::deleteGridRow(int key, wxGrid* grid)
 
 void MainDialog::OnGridCellChangeUnits( wxGridEvent& event )
 {
-    int i = event.GetCol();
 	wxString str = this->m_gridUnits->GetCellValue(event.GetRow(),event.GetCol());
 	
 	renameMaterialAndFood(unit,0, str);
 }	
+
 void MainDialog::OnGridCellChangeLocations( wxGridEvent& event )
 {
     int i = event.GetCol();
@@ -547,7 +547,7 @@ void MainDialog::searchItem(wxGrid* grid, wxString str)
 	   wxString s = grid->GetCellValue(i,TEXT).MakeUpper();
 	   wxStringTokenizer tkz(str1,_T(" "));
 	   
-       int c = tkz.CountTokens();
+ //      int c = tkz.CountTokens();
 	   while(tkz.HasMoreTokens())
 	   {
 		   wxString t = tkz.GetNextToken();
@@ -641,7 +641,7 @@ void MainDialog::saveData()
 	this->m_buttonaddLineMaterial->SetFocus();
 	TiXmlDocument doc;  
 	TiXmlComment * comment;
-	char* s;
+	const char* s;
  	TiXmlDeclaration* decl = new TiXmlDeclaration( "1.0", "UTF-8", "" );  
 	doc.LinkEndChild( decl ); 
  
@@ -778,7 +778,7 @@ void MainDialog::saveData()
 	}
 	wxString xml = pHome_Locn;
 	xml += _T("findit.xml");
-	bool t = doc.SaveFile(xml.mb_str());  
+	doc.SaveFile(xml.mb_str());  
 }
 
 void MainDialog::loadData()
@@ -801,7 +801,7 @@ void MainDialog::loadData()
 	TiXmlElement* pnode  =  hRoot.FirstChild( "LocationsColumnWidth" ).FirstChild().Element();
 
 	int colWidth;
-	for( pnode; pnode; pnode=pnode->NextSiblingElement())
+	for( ; ; pnode=pnode->NextSiblingElement())
 		{
 			for(int i = 0; i < this->m_gridLocations->GetNumberCols(); i++)
 			{
@@ -814,7 +814,7 @@ void MainDialog::loadData()
 
 	wxString data;
 	int lastRow;
-	for( pnode; pnode; pnode=pnode->NextSiblingElement())
+	for( ; ; pnode=pnode->NextSiblingElement())
 		{
 			this->m_gridLocations->AppendRows();
 			lastRow = this->m_gridLocations->GetNumberRows()-1;			
@@ -855,7 +855,7 @@ void MainDialog::loadData()
 
 	pnode  =  hRoot.FirstChild( "UnitsRowData" ).FirstChild().Element();
 
-	for( pnode; pnode; pnode=pnode->NextSiblingElement())
+	for( ; ; pnode=pnode->NextSiblingElement())
 		{
 			this->m_gridUnits->AppendRows();
 			lastRow = this->m_gridUnits->GetNumberRows()-1;			
@@ -868,7 +868,7 @@ void MainDialog::loadData()
 /////////// Material //////////////	
 	pnode  =  hRoot.FirstChild( "MaterialColumnWidth" ).FirstChild().Element();
 
-	for( pnode; pnode; pnode=pnode->NextSiblingElement())
+	for( ; ; pnode=pnode->NextSiblingElement())
 		{
 			for(int i = 0; i < this->m_gridMaterial->GetNumberCols(); i++)
 			{
@@ -879,7 +879,7 @@ void MainDialog::loadData()
 
 	pnode  =  hRoot.FirstChild( "MaterialRowData" ).FirstChild().Element();
 
-	for( pnode; pnode; pnode=pnode->NextSiblingElement())
+	for( ; ; pnode=pnode->NextSiblingElement())
 		{
 			lastRow = this->addLineMaterial();
 			
@@ -893,7 +893,7 @@ void MainDialog::loadData()
 /////////// Provisions //////////////	
 	pnode  =  hRoot.FirstChild( "ProvisionsColumnWidth" ).FirstChild().Element();
 
-	for( pnode; pnode; pnode=pnode->NextSiblingElement())
+	for( ; ; pnode=pnode->NextSiblingElement())
 		{
 			for(int i = 0; i < this->m_gridFood->GetNumberCols(); i++)
 			{
@@ -904,7 +904,7 @@ void MainDialog::loadData()
 
 	pnode  =  hRoot.FirstChild( "ProvisionsRowData" ).FirstChild().Element();
 
-	for( pnode; pnode; pnode=pnode->NextSiblingElement())
+	for( ; ; pnode=pnode->NextSiblingElement())
 		{
 			lastRow = this->addLineFood();
 			
