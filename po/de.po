@@ -1,0 +1,159 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: findit\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-02-02 14:02+0100\n"
+"PO-Revision-Date: 2012-02-02 15:32+0100\n"
+"Last-Translator: Konni <konnibe@hotmail.de>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: C:\\Users\\Konni\\Documents\\Visual Studio 2010\\Projects\\opencpn\\plugins\\FindIt_pi\\src\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: C:\\Users\\Konni\\Documents\\Visual Studio 2010\\Projects\\opencpn\\plugins\\FindIt_pi\\src\n"
+
+#
+#: src/findit_pi.cpp:95
+#: src/findit_pi.cpp:160
+#: src/findit_pi.cpp:199
+#: src/gui.h:98
+msgid "FindIt"
+msgstr ""
+
+#
+#: src/findit_pi.cpp:165
+msgid "Stowage PlugIn for OpenCPN"
+msgstr "Stauraum-Plugin für OpenCPN"
+
+#
+#: src/findit_pi.cpp:170
+msgid "Stowage PlugIn for OpenCPN\n"
+msgstr "Stauraum-Plugin für OpenCPN\n"
+
+#
+#: src/gui.cpp:27
+#: src/gui.cpp:111
+#: src/gui.cpp:194
+#: src/gui.cpp:246
+msgid "Add Line"
+msgstr "Zeile hinzufügen"
+
+#
+#: src/gui.cpp:28
+#: src/gui.cpp:112
+msgid ""
+"Append a row\n"
+"Delete a row = Key <Del>"
+msgstr ""
+"Zeile anfügen\n"
+"Zeile löschen = Taste <Entf>"
+
+#
+#: src/gui.cpp:32
+#: src/gui.cpp:116
+msgid "Enter Searchstring:"
+msgstr "Suchbegriff eingeben:"
+
+#
+#: src/gui.cpp:37
+#: src/gui.cpp:121
+msgid "Separate more than one string with a blank"
+msgstr "mehrere Suchbegriffe durch Leertaste trennen"
+
+#
+#: src/gui.cpp:42
+#: src/gui.cpp:126
+msgid "Buy it"
+msgstr "Kaufe es"
+
+#
+#: src/gui.cpp:43
+#: src/gui.cpp:127
+msgid ""
+"If the logbook-plugin is installed send a list\n"
+"with checked items to 'Logbook/Maintenace/Buy Parts'"
+msgstr ""
+"Wenn das Logbuch-Plugin installiert/aktiviert wurde\n"
+"sende eine Liste mit Einträgen zu 'Logbuch/Instandhaltung/Kaufe Teile'"
+
+#
+#: src/gui.cpp:74
+#: src/gui.cpp:158
+msgid "Buy"
+msgstr "Kaufe"
+
+#
+#: src/gui.cpp:75
+#: src/gui.cpp:159
+msgid "Priority"
+msgstr "Priorität"
+
+#
+#: src/gui.cpp:76
+#: src/gui.cpp:160
+msgid "Quota"
+msgstr "Soll"
+
+#
+#: src/gui.cpp:77
+#: src/gui.cpp:161
+msgid "Actuell"
+msgstr "Ist"
+
+#
+#: src/gui.cpp:78
+#: src/gui.cpp:162
+#: src/gui.cpp:265
+msgid "Unit"
+msgstr "Einheit"
+
+#
+#: src/gui.cpp:79
+#: src/gui.cpp:163
+msgid "Text"
+msgstr ""
+
+#
+#: src/gui.cpp:80
+#: src/gui.cpp:81
+#: src/gui.cpp:82
+#: src/gui.cpp:83
+#: src/gui.cpp:84
+#: src/gui.cpp:85
+#: src/gui.cpp:164
+#: src/gui.cpp:165
+#: src/gui.cpp:166
+#: src/gui.cpp:167
+#: src/gui.cpp:168
+#: src/gui.cpp:169
+#: src/gui.cpp:216
+#: src/gui.cpp:217
+#: src/gui.cpp:218
+#: src/gui.cpp:219
+#: src/gui.cpp:220
+#: src/gui.cpp:221
+msgid "Location"
+msgstr "Ort"
+
+#
+#: src/gui.cpp:103
+msgid "Material"
+msgstr ""
+
+#
+#: src/gui.cpp:186
+msgid "Provisions"
+msgstr "Proviant"
+
+#
+#: src/gui.cpp:238
+msgid "Locations"
+msgstr "Orte"
+
+#
+#: src/gui.cpp:283
+msgid "Units"
+msgstr "Einheiten"
+
