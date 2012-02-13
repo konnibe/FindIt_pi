@@ -44,10 +44,13 @@ class findit_pi;
 class MainDialog : public FindItDialog
 {
 	public:
-		enum FIELDS { BUY,PRIORITY,QUOTA,ACTUELL,UNIT,TEXT,LOC1,LOC2,LOC3,LOC4,LOC5,LOC6};
+		enum FIELDS { BUY,PRIORITY,QUOTA,ACTUELL,TOBUY, UNIT,TEXT,LOC1,LOC2,LOC3,LOC4,LOC5,LOC6};
 
 		MainDialog( wxWindow *parent, findit_pi* p );
 		virtual ~MainDialog();
+
+		void reloadData();
+		void setLogbookColumns(bool logbookReady);
 		
 	protected:
 		// protected event handlers
@@ -82,15 +85,16 @@ class MainDialog : public FindItDialog
 
 		void saveData();
 		void loadData();
+
 		int addLineMaterial();
 		int addLineFood();
 		bool deleteGridRow(int key, wxGrid* grid);
 		void searchItem(wxGrid* grid, wxString str);	
 		void sortGrid(wxGrid* grid, int col, bool ascending);
-		void renameMaterialAndFood(wxArrayString& location1, int column, wxString str);		
-		
+		void renameMaterialAndFood(wxArrayString& location1, int column, wxString str);	
+	
 private:		
-		wxArrayString location1,location2,location3,location4,location5,location6,unit;
+		wxArrayString location1,location2,location3,location4,location5,location6,unit,prioritystr;
 		int lastRowSelectedMaterial, lastRowSelectedFood, lastRowSelectedUnits, lastRowSelectedLocations;
 		int lastColSelectedMaterial, lastColSelectedFood, lastColSelectedUnits, lastColSelectedLocations;
 		wxString oldCellValue;
@@ -107,6 +111,7 @@ private:
 		wxGridCellChoiceEditor* combo4;
 		wxGridCellChoiceEditor* combo5;
 	    wxGridCellChoiceEditor* comboUnit;	
+	    wxGridCellChoiceEditor* comboPriority;	
 };
 
 WX_DECLARE_OBJARRAY(wxArrayString, myGridStringArray);//(,

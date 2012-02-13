@@ -142,8 +142,8 @@ SectionEnd
 Section "Languages" SEC02
 ;   SetOutPath "$INSTDIR\share\locale\cs\LC_MESSAGES\"
 ;   File "C:\Program Files (x86)\OpenCPN\share\locale\cs\LC_MESSAGES\opencpn-logbookkonni_pi.mo"
-;   SetOutPath "$INSTDIR\share\locale\de\LC_MESSAGES\"
-;   File "C:\Program Files (x86)\OpenCPN\share\locale\de\LC_MESSAGES\opencpn-logbookkonni_pi.mo"
+   SetOutPath "$INSTDIR\share\locale\de\LC_MESSAGES\"
+   File "C:\Program Files (x86)\OpenCPN\share\locale\de\LC_MESSAGES\opencpn-findit_pi.mo"
 ;   SetOutPath "$INSTDIR\share\locale\fr\LC_MESSAGES\"
 ;   File "C:\Program Files (x86)\OpenCPN\share\locale\fr\LC_MESSAGES\opencpn-logbookkonni_pi.mo"
 ;   SetOutPath "$INSTDIR\share\locale\es\LC_MESSAGES\"

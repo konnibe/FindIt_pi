@@ -27,6 +27,9 @@
 #include <wx/icon.h>
 #include <wx/notebook.h>
 #include <wx/dialog.h>
+#include <wx/checkbox.h>
+#include <wx/radiobox.h>
+#include <wx/statline.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -97,6 +100,35 @@ class FindItDialog : public wxDialog
 		
 		FindItDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("FindIt"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 943,518 ), long style = wxCLOSE_BOX|wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER ); 
 		~FindItDialog();
+	
+};
+
+class findit_pi;
+///////////////////////////////////////////////////////////////////////////////
+/// Class OptionsDialog
+///////////////////////////////////////////////////////////////////////////////
+class OptionsDialog : public wxDialog 
+{
+	private:
+	    findit_pi* parent; 
+	protected:
+		wxStaticLine* m_staticline1;
+		wxStdDialogButtonSizer* m_sdbSizer2;
+		wxButton* m_sdbSizer2OK;
+		wxButton* m_sdbSizer2Cancel;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void OnInitDialog( wxInitDialogEvent& event ) ;
+		
+	
+	public:
+		wxCheckBox* m_checkBoxFindItIcon;
+		wxRadioBox* m_radioBox1;
+		wxRadioBox* m_radioBox11;
+		wxRadioBox* m_radioBox5;
+		
+		OptionsDialog( wxWindow* parent, findit_pi* p, wxWindowID id = wxID_ANY, const wxString& title = _("FindIt Options"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 257,257 ), long style = wxDEFAULT_DIALOG_STYLE ); 
+		~OptionsDialog();
 	
 };
 

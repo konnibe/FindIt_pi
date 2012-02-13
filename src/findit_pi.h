@@ -37,7 +37,7 @@
 #endif //precompiled headers
 
 #define     PLUGIN_VERSION_MAJOR    0
-#define     PLUGIN_VERSION_MINOR    3
+#define     PLUGIN_VERSION_MINOR    5
 
 #define     MY_API_VERSION_MAJOR    1
 //#define     MY_API_VERSION_MINOR    5  // for OpenCPN 2.5
@@ -73,7 +73,7 @@ public:
 //    The optional method overrides
   	  void OnToolbarToolCallback(int id);
 	  void SetPluginMessage(wxString &message_id, wxString &message_body);
-
+	  void ShowPreferencesDialog( wxWindow* parent );
       void UpdateAuiStatus(void);
       
 	  void SetDefaults(void);
@@ -81,17 +81,24 @@ public:
 	  bool isLogbookReady;
 	  bool isLogbookWindowShown;
 
+	  int		buyNo;
+	  int		toBuyZero;
+	  int		lastRowDefault;
+	  bool		m_bFINDITShowIcon;
+
 private:
       wxWindow         *m_parent_window;
 
       MainDialog       *m_pFindItWindow;
       wxAuiManager     *m_AUImgr;
+	  wxFileConfig     *m_pconfig;
       int               m_show_id;
       int               m_hide_id;
 
-	  bool				m_bLOGShowIcon;
 	  int				m_leftclick_tool_id;
 
+	  void				SaveConfig();
+	  void				LoadConfig();
 };
 
 

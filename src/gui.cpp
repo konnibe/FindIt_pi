@@ -49,7 +49,7 @@ FindItDialog::FindItDialog( wxWindow* parent, wxWindowID id, const wxString& tit
 	m_gridMaterial = new wxGrid( m_panel1, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
 	
 	// Grid
-	m_gridMaterial->CreateGrid( 0, 12 );
+	m_gridMaterial->CreateGrid( 0, 13 );
 	m_gridMaterial->EnableEditing( true );
 	m_gridMaterial->EnableGridLines( true );
 	m_gridMaterial->EnableDragGridSize( false );
@@ -75,14 +75,15 @@ FindItDialog::FindItDialog( wxWindow* parent, wxWindowID id, const wxString& tit
 	m_gridMaterial->SetColLabelValue( 1, _("Priority") );
 	m_gridMaterial->SetColLabelValue( 2, _("Quota") );
 	m_gridMaterial->SetColLabelValue( 3, _("Actuell") );
-	m_gridMaterial->SetColLabelValue( 4, _("Unit") );
-	m_gridMaterial->SetColLabelValue( 5, _("Text") );
-	m_gridMaterial->SetColLabelValue( 6, _("Location") );
+	m_gridMaterial->SetColLabelValue( 4, _("Balance") );
+	m_gridMaterial->SetColLabelValue( 5, _("Unit") );
+	m_gridMaterial->SetColLabelValue( 6, _("Text") );
 	m_gridMaterial->SetColLabelValue( 7, _("Location") );
 	m_gridMaterial->SetColLabelValue( 8, _("Location") );
 	m_gridMaterial->SetColLabelValue( 9, _("Location") );
 	m_gridMaterial->SetColLabelValue( 10, _("Location") );
 	m_gridMaterial->SetColLabelValue( 11, _("Location") );
+	m_gridMaterial->SetColLabelValue( 12, _("Location") );
 	m_gridMaterial->SetColLabelAlignment( wxALIGN_CENTRE, wxALIGN_CENTRE );
 	
 	// Rows
@@ -133,7 +134,7 @@ FindItDialog::FindItDialog( wxWindow* parent, wxWindowID id, const wxString& tit
 	m_gridFood = new wxGrid( m_panel2, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
 	
 	// Grid
-	m_gridFood->CreateGrid( 0, 12 );
+	m_gridFood->CreateGrid( 0, 13 );
 	m_gridFood->EnableEditing( true );
 	m_gridFood->EnableGridLines( true );
 	m_gridFood->EnableDragGridSize( false );
@@ -159,14 +160,15 @@ FindItDialog::FindItDialog( wxWindow* parent, wxWindowID id, const wxString& tit
 	m_gridFood->SetColLabelValue( 1, _("Priority") );
 	m_gridFood->SetColLabelValue( 2, _("Quota") );
 	m_gridFood->SetColLabelValue( 3, _("Actuell") );
-	m_gridFood->SetColLabelValue( 4, _("Unit") );
-	m_gridFood->SetColLabelValue( 5, _("Text") );
-	m_gridFood->SetColLabelValue( 6, _("Location") );
+	m_gridFood->SetColLabelValue( 4, _("Balance") );
+	m_gridFood->SetColLabelValue( 5, _("Unit") );
+	m_gridFood->SetColLabelValue( 6, _("Text") );
 	m_gridFood->SetColLabelValue( 7, _("Location") );
 	m_gridFood->SetColLabelValue( 8, _("Location") );
 	m_gridFood->SetColLabelValue( 9, _("Location") );
 	m_gridFood->SetColLabelValue( 10, _("Location") );
 	m_gridFood->SetColLabelValue( 11, _("Location") );
+	m_gridFood->SetColLabelValue( 12, _("Location") );
 	m_gridFood->SetColLabelAlignment( wxALIGN_CENTRE, wxALIGN_CENTRE );
 	
 	// Rows
@@ -183,7 +185,7 @@ FindItDialog::FindItDialog( wxWindow* parent, wxWindowID id, const wxString& tit
 	m_panel2->SetSizer( bSizer3 );
 	m_panel2->Layout();
 	bSizer3->Fit( m_panel2 );
-	m_notebook1->AddPage( m_panel2, _("Provisions"), false );
+	m_notebook1->AddPage( m_panel2, _("Provisions"), true );
 	m_panel3 = new wxPanel( m_notebook1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxBoxSizer* bSizer5;
 	bSizer5 = new wxBoxSizer( wxVERTICAL );
@@ -280,7 +282,7 @@ FindItDialog::FindItDialog( wxWindow* parent, wxWindowID id, const wxString& tit
 	m_panel4->SetSizer( bSizer21 );
 	m_panel4->Layout();
 	bSizer21->Fit( m_panel4 );
-	m_notebook1->AddPage( m_panel4, _("Units"), true );
+	m_notebook1->AddPage( m_panel4, _("Units"), false );
 	
 	mainSizer->Add( m_notebook1, 1, wxEXPAND | wxALL, 5 );
 	
@@ -359,5 +361,70 @@ FindItDialog::~FindItDialog()
 	m_gridUnits->Disconnect( wxEVT_GRID_EDITOR_SHOWN, wxGridEventHandler( FindItDialog::onEditorShownUnits ), NULL, this );
 	m_sdbSizerCancel->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( FindItDialog::OnCancelClick ), NULL, this );
 	m_sdbSizerOK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( FindItDialog::OnOKClick ), NULL, this );
+	
+}
+
+OptionsDialog::OptionsDialog( wxWindow* parent, findit_pi* p, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+{
+	this->parent = p;
+
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	
+	wxBoxSizer* bSizer10;
+	bSizer10 = new wxBoxSizer( wxVERTICAL );
+	
+	wxFlexGridSizer* fgSizer1;
+	fgSizer1 = new wxFlexGridSizer( 0, 1, 0, 0 );
+	fgSizer1->SetFlexibleDirection( wxBOTH );
+	fgSizer1->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_checkBoxFindItIcon = new wxCheckBox( this, wxID_ANY, _("Show FindIt Icon"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_checkBoxFindItIcon->SetValue(true); 
+	fgSizer1->Add( m_checkBoxFindItIcon, 0, wxALL, 5 );
+	
+	wxString m_radioBox1Choices[] = { _("blank"), _T("\"0\"") };
+	int m_radioBox1NChoices = sizeof( m_radioBox1Choices ) / sizeof( wxString );
+	m_radioBox1 = new wxRadioBox( this, wxID_ANY, _("If Value of Column \"To Buy\" = 0, set Value to"), wxDefaultPosition, wxDefaultSize, m_radioBox1NChoices, m_radioBox1Choices, 1, wxRA_SPECIFY_ROWS|wxRA_USE_CHECKBOX );
+	m_radioBox1->SetSelection( 0 );
+	fgSizer1->Add( m_radioBox1, 0, wxALL, 5 );
+	
+	wxString m_radioBox11Choices[] = { _("blank"), _("\"No\"") };
+	int m_radioBox11NChoices = sizeof( m_radioBox11Choices ) / sizeof( wxString );
+	m_radioBox11 = new wxRadioBox( this, wxID_ANY, _("If Value of Column \"Buy\" = No, set Value to"), wxDefaultPosition, wxDefaultSize, m_radioBox11NChoices, m_radioBox11Choices, 1, wxRA_SPECIFY_ROWS|wxRA_USE_CHECKBOX );
+	m_radioBox11->SetSelection( 0 );
+	fgSizer1->Add( m_radioBox11, 0, wxALL, 5 );
+	
+	wxString m_radioBox5Choices[] = { _("Yes"), _("No") };
+	int m_radioBox5NChoices = sizeof( m_radioBox5Choices ) / sizeof( wxString );
+	m_radioBox5 = new wxRadioBox( this, wxID_ANY, _("Use last row values  as default for new row"), wxDefaultPosition, wxDefaultSize, m_radioBox5NChoices, m_radioBox5Choices, 1, wxRA_SPECIFY_ROWS|wxRA_USE_CHECKBOX );
+	m_radioBox5->SetSelection( 0 );
+	fgSizer1->Add( m_radioBox5, 0, wxALL, 5 );
+	
+	bSizer10->Add( fgSizer1, 0, 0, 5 );
+	
+	m_staticline1 = new wxStaticLine( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
+	bSizer10->Add( m_staticline1, 0, wxEXPAND | wxALL, 5 );
+	
+	m_sdbSizer2 = new wxStdDialogButtonSizer();
+	m_sdbSizer2OK = new wxButton( this, wxID_OK );
+	m_sdbSizer2->AddButton( m_sdbSizer2OK );
+	m_sdbSizer2Cancel = new wxButton( this, wxID_CANCEL );
+	m_sdbSizer2->AddButton( m_sdbSizer2Cancel );
+	m_sdbSizer2->Realize();
+	bSizer10->Add( m_sdbSizer2, 0, wxALIGN_CENTER, 5 );
+	
+	this->SetSizer( bSizer10 );
+	this->Layout();
+	
+	this->Centre( wxBOTH );
+	
+	// Connect Events
+	this->Connect( wxEVT_INIT_DIALOG, wxInitDialogEventHandler( OptionsDialog::OnInitDialog ) );
+}
+
+OptionsDialog::~OptionsDialog()
+{
+	// Disconnect Events
+	this->Disconnect( wxEVT_INIT_DIALOG, wxInitDialogEventHandler( OptionsDialog::OnInitDialog ) );
 	
 }

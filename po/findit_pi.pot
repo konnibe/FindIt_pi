@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: findit_pi 2.6.1310\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-02 14:02+0100\n"
+"POT-Creation-Date: 2012-02-12 16:14+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,91 +16,135 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/findit_pi.cpp:95 src/findit_pi.cpp:160 src/findit_pi.cpp:199
-#: src/gui.h:98
+#: src/findit_pi.cpp:102 src/findit_pi.cpp:168 src/findit_pi.cpp:207
+#: src/findit_pi.cpp:245 src/gui.h:101
 msgid "FindIt"
 msgstr ""
 
-#: src/findit_pi.cpp:165
+#: src/findit_pi.cpp:173
 msgid "Stowage PlugIn for OpenCPN"
 msgstr ""
 
-#: src/findit_pi.cpp:170
+#: src/findit_pi.cpp:178
 msgid "Stowage PlugIn for OpenCPN\n"
 msgstr ""
 
-#: src/gui.cpp:27 src/gui.cpp:111 src/gui.cpp:194 src/gui.cpp:246
+#: src/gui.h:130
+msgid "FindIt Options"
+msgstr ""
+
+#: src/gui.cpp:27 src/gui.cpp:112 src/gui.cpp:196 src/gui.cpp:248
 msgid "Add Line"
 msgstr ""
 
-#: src/gui.cpp:28 src/gui.cpp:112
+#: src/gui.cpp:28 src/gui.cpp:113
 msgid ""
 "Append a row\n"
 "Delete a row = Key <Del>"
 msgstr ""
 
-#: src/gui.cpp:32 src/gui.cpp:116
+#: src/gui.cpp:32 src/gui.cpp:117
 msgid "Enter Searchstring:"
 msgstr ""
 
-#: src/gui.cpp:37 src/gui.cpp:121
+#: src/gui.cpp:37 src/gui.cpp:122
 msgid "Separate more than one string with a blank"
 msgstr ""
 
-#: src/gui.cpp:42 src/gui.cpp:126
+#: src/gui.cpp:42 src/gui.cpp:127
 msgid "Buy it"
 msgstr ""
 
-#: src/gui.cpp:43 src/gui.cpp:127
+#: src/gui.cpp:43 src/gui.cpp:128
 msgid ""
 "If the logbook-plugin is installed send a list\n"
 "with checked items to 'Logbook/Maintenace/Buy Parts'"
 msgstr ""
 
-#: src/gui.cpp:74 src/gui.cpp:158
+#: src/gui.cpp:74 src/gui.cpp:159
 msgid "Buy"
 msgstr ""
 
-#: src/gui.cpp:75 src/gui.cpp:159
+#: src/gui.cpp:75 src/gui.cpp:160
 msgid "Priority"
 msgstr ""
 
-#: src/gui.cpp:76 src/gui.cpp:160
+#: src/gui.cpp:76 src/gui.cpp:161
 msgid "Quota"
 msgstr ""
 
-#: src/gui.cpp:77 src/gui.cpp:161
+#: src/gui.cpp:77 src/gui.cpp:162
 msgid "Actuell"
 msgstr ""
 
-#: src/gui.cpp:78 src/gui.cpp:162 src/gui.cpp:265
+#: src/gui.cpp:78
+msgid "To Buy"
+msgstr ""
+
+#: src/gui.cpp:79 src/gui.cpp:164 src/gui.cpp:267
 msgid "Unit"
 msgstr ""
 
-#: src/gui.cpp:79 src/gui.cpp:163
+#: src/gui.cpp:80 src/gui.cpp:165
 msgid "Text"
 msgstr ""
 
-#: src/gui.cpp:80 src/gui.cpp:81 src/gui.cpp:82 src/gui.cpp:83 src/gui.cpp:84
-#: src/gui.cpp:85 src/gui.cpp:164 src/gui.cpp:165 src/gui.cpp:166
-#: src/gui.cpp:167 src/gui.cpp:168 src/gui.cpp:169 src/gui.cpp:216
-#: src/gui.cpp:217 src/gui.cpp:218 src/gui.cpp:219 src/gui.cpp:220
-#: src/gui.cpp:221
+#: src/gui.cpp:81 src/gui.cpp:82 src/gui.cpp:83 src/gui.cpp:84 src/gui.cpp:85
+#: src/gui.cpp:86 src/gui.cpp:166 src/gui.cpp:167 src/gui.cpp:168
+#: src/gui.cpp:169 src/gui.cpp:170 src/gui.cpp:171 src/gui.cpp:218
+#: src/gui.cpp:219 src/gui.cpp:220 src/gui.cpp:221 src/gui.cpp:222
+#: src/gui.cpp:223
 msgid "Location"
 msgstr ""
 
-#: src/gui.cpp:103
+#: src/gui.cpp:104
 msgid "Material"
 msgstr ""
 
-#: src/gui.cpp:186
+#: src/gui.cpp:163
+msgid "Balance"
+msgstr ""
+
+#: src/gui.cpp:188
 msgid "Provisions"
 msgstr ""
 
-#: src/gui.cpp:238
+#: src/gui.cpp:240
 msgid "Locations"
 msgstr ""
 
-#: src/gui.cpp:283
+#: src/gui.cpp:285
 msgid "Units"
+msgstr ""
+
+#: src/gui.cpp:381
+msgid "Show FindIt Icon"
+msgstr ""
+
+#: src/gui.cpp:385 src/gui.cpp:391
+msgid "blank"
+msgstr ""
+
+#: src/gui.cpp:387
+msgid "If Value of Column \"To Buy\" = 0, set Value to"
+msgstr ""
+
+#: src/gui.cpp:391
+msgid "\"No\""
+msgstr ""
+
+#: src/gui.cpp:393
+msgid "If Value of Column \"Buy\" = No, set Value to"
+msgstr ""
+
+#: src/gui.cpp:397
+msgid "Yes"
+msgstr ""
+
+#: src/gui.cpp:397
+msgid "No"
+msgstr ""
+
+#: src/gui.cpp:399
+msgid "Use last row values  as default for new row"
 msgstr ""

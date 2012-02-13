@@ -27,26 +27,6 @@
 #include "jsonwriter.h"
 
 
-// initialize the application
-//IMPLEMENT_APP(MainApp);
-
-////////////////////////////////////////////////////////////////////////////////
-// application class implementation 
-////////////////////////////////////////////////////////////////////////////////
-/*
-bool MainApp::OnInit()
-{
-	SetTopWindow( new MainDialog( NULL ) );
-	GetTopWindow()->Show();
-	
-	// true = enter the main loop
-	return true;
-}
-*/
-////////////////////////////////////////////////////////////////////////////////
-// main application frame implementation 
-////////////////////////////////////////////////////////////////////////////////
-
 MainDialog::MainDialog(wxWindow* parent,findit_pi *p) : FindItDialog( parent )
 {
 	pPlugin = p;
@@ -94,6 +74,13 @@ void MainDialog::OnInit( wxInitDialogEvent& event )
 
 	unit.Add(_T(""));
 
+	prioritystr.Add(_T("0"));
+	prioritystr.Add(_T("1"));
+	prioritystr.Add(_T("2"));
+	prioritystr.Add(_T("3"));
+	prioritystr.Add(_T("4"));
+	prioritystr.Add(_T("5"));
+
 	wxStandardPathsBase& std_path = wxStandardPathsBase::Get();
 #ifdef __WXMSW__
 	wxString stdPath  = std_path.GetConfigDir();
@@ -120,19 +107,69 @@ void MainDialog::OnInit( wxInitDialogEvent& event )
 
 	this->m_notebook1->SetSelection(0);
 	this->m_textCtrl1->SetFocus();
+
+	setLogbookColumns(pPlugin->isLogbookReady);
+}
+
+void MainDialog::setLogbookColumns(bool logbookReady)
+{
+	m_buttonBuyItMaterial->Show(logbookReady);
+	m_buttonBuyItFood->Show(logbookReady);
+
+	if(!logbookReady)
+	{
+		m_gridMaterial->SetColMinimalAcceptableWidth(0);
+		m_gridFood->SetColMinimalAcceptableWidth(0);
+
+		for(int col = BUY; col < UNIT; col++)
+		{
+			if(col == ACTUELL) continue;
+			m_gridMaterial->SetColumnWidth(col,0);
+			m_gridFood->SetColumnWidth(col,0);
+		}
+	}
+	else
+	{
+		for(int col = BUY; col < UNIT; col++)
+		{
+			if(col == ACTUELL) continue;
+			m_gridMaterial->SetColumnWidth(col,50);
+			m_gridFood->SetColumnWidth(col,50);
+		}
+	}
+
+	this->Refresh();
 }
 
 void MainDialog::OnGridLabelLClickFood( wxGridEvent& event )
 {
+	int row, col;
+	row = event.GetRow();
+	col = event.GetCol();
+
+	this->m_gridFood->SetFocus();
+
+	if(row != -1 || (row == -1 && col == -1)) { event.Skip(); return; }
+	this->m_gridFood->SetGridCursor(0,col);
+
 	static bool ascending = true;
-	sortGrid(this->m_gridFood,event.GetCol(),ascending);	
+	sortGrid(this->m_gridFood,col,ascending);	
 	ascending = !ascending;
 }
 
 void MainDialog::OnGridLabelLClickMaterial( wxGridEvent& event )
 {
+	int row, col;
+	row = event.GetRow();
+	col = event.GetCol();
+
+	this->m_gridMaterial->SetFocus();
+
+	if(row != -1 || (row == -1 && col == -1)) { event.Skip(); return; }
+	this->m_gridMaterial->SetGridCursor(0,col);
+
 	static bool ascending = true;
-	sortGrid(this->m_gridMaterial, event.GetCol(),ascending);
+	sortGrid(this->m_gridMaterial, col,ascending);
 	ascending = !ascending;
 }
 
@@ -142,6 +179,8 @@ void MainDialog::sortGrid(wxGrid* grid, int col, bool ascending)
 	myGridStringTable* data = (myGridStringTable*)grid->GetTable();
 
 	wxGridStringArray arr = data->m_data;
+	if(arr.Count() < 2) return;
+
 	wxGridStringArray temp;
 
 	temp .Add(arr[0]);
@@ -192,11 +231,59 @@ void MainDialog::OnGridCellChangeMaterial( wxGridEvent& event )
 			int act   = atoi(this->m_gridMaterial->GetCellValue(row,ACTUELL).mb_str());
 
 			if(act < quota)
+			{
 				this->m_gridMaterial->SetCellValue(row,BUY,_("Yes"));
+				this->m_gridMaterial->SetCellValue(row,TOBUY,wxString::Format(_T("%i"),quota-act));
+			}
 			else
-				this->m_gridMaterial->SetCellValue(row,BUY,_T(""));
+			{
+				if(!pPlugin->buyNo)
+					this->m_gridMaterial->SetCellValue(row,BUY,_T(""));
+				else
+					this->m_gridMaterial->SetCellValue(row,BUY,_("No"));
+
+				if(!pPlugin->toBuyZero)
+					this->m_gridMaterial->SetCellValue(row,TOBUY,_T(""));
+				else
+					this->m_gridMaterial->SetCellValue(row,TOBUY,_T("0"));
+			}
 		}
 	}
+
+	if(col == TOBUY)
+	{
+		if(wxAtoi(this->m_gridMaterial->GetCellValue(row,TOBUY)) > 0)
+			m_gridMaterial->SetCellValue(row,BUY,_("Yes"));
+
+		if(wxAtoi(this->m_gridMaterial->GetCellValue(row,TOBUY)) == 0 && pPlugin->buyNo == 1)
+			m_gridMaterial->SetCellValue(row,BUY,_("No"));
+		if(wxAtoi(this->m_gridMaterial->GetCellValue(row,TOBUY)) == 0 && pPlugin->buyNo == 0)
+			m_gridMaterial->SetCellValue(row,BUY,_T(""));
+	}
+}
+
+void MainDialog::reloadData()
+{
+	saveData();
+
+	if(this->m_gridMaterial->GetNumberRows())
+		this->m_gridMaterial->DeleteRows (0,this->m_gridMaterial->GetNumberRows());
+	if(this->m_gridFood->GetNumberRows())
+		this->m_gridFood->DeleteRows     (0,this->m_gridFood->GetNumberRows());
+	if(this->m_gridUnits->GetNumberRows())
+		this->m_gridUnits->DeleteRows    (0,this->m_gridUnits->GetNumberRows());
+	if(this->m_gridLocations->GetNumberRows())
+		this->m_gridLocations->DeleteRows(0,this->m_gridLocations->GetNumberRows());
+	location1.clear();
+	location2.clear();
+	location3.clear();
+	location4.clear();
+	location5.clear();
+	location6.clear();
+	unit.clear();
+
+	loadData();
+	this->Refresh();
 }
 
 void MainDialog::OnGridCellChangeFood( wxGridEvent& event )
@@ -212,44 +299,59 @@ void MainDialog::OnGridCellChangeFood( wxGridEvent& event )
 			int act   = atoi(this->m_gridFood->GetCellValue(row,ACTUELL).mb_str());
 
 			if(act < quota)
-				this->m_gridFood->SetCellValue(row,BUY,_T("Yes"));
+			{
+				this->m_gridFood->SetCellValue(row,BUY,_("Yes"));
+				this->m_gridFood->SetCellValue(row,TOBUY,wxString::Format(_T("%i"),quota-act));
+			}
 			else
-				this->m_gridFood->SetCellValue(row,BUY,_T(""));
+			{
+				if(!pPlugin->buyNo)
+					this->m_gridFood->SetCellValue(row,BUY,_T(""));
+				else
+					this->m_gridFood->SetCellValue(row,BUY,_("No"));
+
+				if(!pPlugin->toBuyZero)
+					this->m_gridFood->SetCellValue(row,TOBUY,_T(""));
+				else
+					this->m_gridFood->SetCellValue(row,TOBUY,_T("0"));
+			}
 		}
+	}
+
+	if(col == TOBUY)
+	{
+		if(wxAtoi(this->m_gridFood->GetCellValue(row,TOBUY)) > 0)
+			m_gridFood->SetCellValue(row,BUY,_("Yes"));
+
+		if(wxAtoi(this->m_gridFood->GetCellValue(row,TOBUY)) == 0 && pPlugin->buyNo == 1)
+			m_gridFood->SetCellValue(row,BUY,_("No"));
+		if(wxAtoi(this->m_gridFood->GetCellValue(row,TOBUY)) == 0 && pPlugin->buyNo == 0)
+			m_gridFood->SetCellValue(row,BUY,_T(""));
 	}
 }
 
 void MainDialog::OnButtonClickBuyFood( wxCommandEvent& event )
 {
 	wxJSONValue v;
-	long val, actuell;
+	long val, tobuy;
 	bool write = false;
 	int ind = 0;
 
-	if(!pPlugin->isLogbookReady) 
-	{
-		wxMessageBox(_("Logbook-Plugin is not installed or activated"));
-		return;
-	}
-
 	for(int i = 0; i < this->m_gridFood->GetNumberRows(); i++)
 	{
-		if(this->m_gridFood->GetCellValue(i,BUY) != wxEmptyString)
+		if(this->m_gridFood->GetCellValue(i,BUY) != wxEmptyString && this->m_gridFood->GetCellValue(i,BUY) != _("No"))
 		{
 			this->m_gridFood->GetCellValue(i,PRIORITY).ToLong(&val);
 			v[ind][_T("Priority")] = (int) val;
 			v[ind][_T("Category")] = _T("Food");
 			v[ind][_T("PluginName")] = _T("FindIt");
-			this->m_gridFood->GetCellValue(i,QUOTA).ToLong(&val);
-			this->m_gridFood->GetCellValue(i,ACTUELL).ToLong(&actuell);
-			if(actuell < val)
-				val = actuell;
-			v[ind][_T("Amount")] = val;
+			this->m_gridFood->GetCellValue(i,TOBUY).ToLong(&tobuy);
+			v[ind][_T("Amount")] = tobuy;
 			v[ind][_T("Unit")] = this->m_gridFood->GetCellValue(i,UNIT);
 			v[ind++][_T("Text")] = this->m_gridFood->GetCellValue(i,TEXT);
 			write = true;
 
-			this->m_gridFood->SetCellValue(i,BUY,_T(""));
+		//	this->m_gridFood->SetCellValue(i,BUY,_T(""));
 		}
 	}
 
@@ -265,35 +367,27 @@ void MainDialog::OnButtonClickBuyFood( wxCommandEvent& event )
 
 void MainDialog::OnButtonClickBuyMaterial( wxCommandEvent& event )
 {
-	wxJSONValue v;
-	long val, actuell;
+	wxJSONValue v = NULL;
+	long val, tobuy;
 	bool write = false;
 	int ind = 0;
 
-	if(!pPlugin->isLogbookReady) 
-	{
-		wxMessageBox(_("Logbook-Plugin is not installed or activated"));
-		return;
-	}
-
 	for(int i = 0; i < this->m_gridMaterial->GetNumberRows(); i++)
 	{
-		if(this->m_gridMaterial->GetCellValue(i,BUY) != wxEmptyString)
+		if(this->m_gridMaterial->GetCellValue(i,BUY) != wxEmptyString && this->m_gridMaterial->GetCellValue(i,BUY) != _("No"))
 		{
 			this->m_gridMaterial->GetCellValue(i,PRIORITY).ToLong(&val);
 			v[ind][_T("Priority")] = (int) val;
 			v[ind][_T("Category")] = _T("Material");
 			v[ind][_T("PluginName")] = _T("FindIt");
-			this->m_gridMaterial->GetCellValue(i,QUOTA).ToLong(&val);
-			this->m_gridMaterial->GetCellValue(i,ACTUELL).ToLong(&actuell);
-			if(actuell < val)
-				val -= actuell;
-			v[ind][_T("Amount")] = val;
+			this->m_gridMaterial->GetCellValue(i,TOBUY).ToLong(&tobuy);
+			v[ind][_T("Amount")] = tobuy;
 			v[ind][_T("Unit")] = this->m_gridMaterial->GetCellValue(i,UNIT);
 			v[ind++][_T("Text")] = this->m_gridMaterial->GetCellValue(i,TEXT);
 			write = true;
 
-			this->m_gridMaterial->SetCellValue(i,BUY,_T(""));
+//			if(pPlugin->buyNo)
+//				this->m_gridMaterial->SetCellValue(i,BUY,_T(""));
 		}
 	}
 
@@ -311,11 +405,16 @@ void MainDialog::OnButtonClickMaterialAdd( wxCommandEvent& event )
 	lastRowSelectedMaterial = addLineMaterial();
 	lastColSelectedMaterial = PRIORITY;
 
-	if(lastRowSelectedMaterial != 0)
+	if(pPlugin->lastRowDefault == 1)
+		this->m_gridMaterial->SetCellValue(lastRowSelectedMaterial,BUY,_("No"));
+
+	if(lastRowSelectedMaterial != 0 && pPlugin->lastRowDefault == 0)
 	{
+		this->m_gridMaterial->SetCellValue(lastRowSelectedMaterial,BUY,this->m_gridMaterial->GetCellValue(lastRowSelectedMaterial-1,BUY));
 		this->m_gridMaterial->SetCellValue(lastRowSelectedMaterial,PRIORITY,this->m_gridMaterial->GetCellValue(lastRowSelectedMaterial-1,PRIORITY));
 		this->m_gridMaterial->SetCellValue(lastRowSelectedMaterial,QUOTA,this->m_gridMaterial->GetCellValue(lastRowSelectedMaterial-1,QUOTA));
 		this->m_gridMaterial->SetCellValue(lastRowSelectedMaterial,ACTUELL,this->m_gridMaterial->GetCellValue(lastRowSelectedMaterial-1,ACTUELL));
+		this->m_gridMaterial->SetCellValue(lastRowSelectedMaterial,TOBUY,this->m_gridMaterial->GetCellValue(lastRowSelectedMaterial-1,TOBUY));
 		this->m_gridMaterial->SetCellValue(lastRowSelectedMaterial,UNIT,this->m_gridMaterial->GetCellValue(lastRowSelectedMaterial-1,UNIT));		
 		this->m_gridMaterial->SetCellValue(lastRowSelectedMaterial,LOC1,this->m_gridMaterial->GetCellValue(lastRowSelectedMaterial-1,LOC1));
 		this->m_gridMaterial->SetCellValue(lastRowSelectedMaterial,LOC2,this->m_gridMaterial->GetCellValue(lastRowSelectedMaterial-1,LOC2));
@@ -324,6 +423,7 @@ void MainDialog::OnButtonClickMaterialAdd( wxCommandEvent& event )
 		this->m_gridMaterial->SetCellValue(lastRowSelectedMaterial,LOC5,this->m_gridMaterial->GetCellValue(lastRowSelectedMaterial-1,LOC5));
 		this->m_gridMaterial->SetCellValue(lastRowSelectedMaterial,LOC6,this->m_gridMaterial->GetCellValue(lastRowSelectedMaterial-1,LOC6));
 	}
+
 	this->m_gridMaterial->SetFocus();
 	this->m_gridMaterial->MakeCellVisible(lastRowSelectedMaterial,PRIORITY);
 	this->m_gridMaterial->SetGridCursor(lastRowSelectedMaterial,PRIORITY);
@@ -334,11 +434,16 @@ void MainDialog::OnButtonClickAddLineFood( wxCommandEvent& event )
 	lastRowSelectedFood = addLineFood();
 	lastColSelectedFood = PRIORITY;
 
-	if(lastRowSelectedFood != 0)
+	if(pPlugin->lastRowDefault == 1)
+		this->m_gridFood->SetCellValue(lastRowSelectedFood,BUY,_("No"));
+
+	if(lastRowSelectedFood != 0 && pPlugin->lastRowDefault == 0)
 	{
+		this->m_gridFood->SetCellValue(lastRowSelectedFood,BUY,this->m_gridFood->GetCellValue(lastRowSelectedFood-1,BUY));
 		this->m_gridFood->SetCellValue(lastRowSelectedFood,PRIORITY,this->m_gridFood->GetCellValue(lastRowSelectedFood-1,PRIORITY));
 		this->m_gridFood->SetCellValue(lastRowSelectedFood,QUOTA,this->m_gridFood->GetCellValue(lastRowSelectedFood-1,QUOTA));
 		this->m_gridFood->SetCellValue(lastRowSelectedFood,ACTUELL,this->m_gridFood->GetCellValue(lastRowSelectedFood-1,ACTUELL));
+		this->m_gridFood->SetCellValue(lastRowSelectedFood,TOBUY,this->m_gridFood->GetCellValue(lastRowSelectedFood-1,TOBUY));
 		this->m_gridFood->SetCellValue(lastRowSelectedFood,UNIT,this->m_gridFood->GetCellValue(lastRowSelectedFood-1,UNIT));		
 		this->m_gridFood->SetCellValue(lastRowSelectedFood,LOC1,this->m_gridFood->GetCellValue(lastRowSelectedFood-1,LOC1));
 		this->m_gridFood->SetCellValue(lastRowSelectedFood,LOC2,this->m_gridFood->GetCellValue(lastRowSelectedFood-1,LOC2));
@@ -347,6 +452,7 @@ void MainDialog::OnButtonClickAddLineFood( wxCommandEvent& event )
 		this->m_gridFood->SetCellValue(lastRowSelectedFood,LOC5,this->m_gridFood->GetCellValue(lastRowSelectedFood-1,LOC5));
 		this->m_gridFood->SetCellValue(lastRowSelectedFood,LOC6,this->m_gridFood->GetCellValue(lastRowSelectedFood-1,LOC6));	
 	}
+
 	this->m_gridFood->SetFocus();
 	this->m_gridFood->MakeCellVisible(lastRowSelectedFood,PRIORITY);
 	this->m_gridFood->SetGridCursor(lastRowSelectedFood,PRIORITY);
@@ -578,12 +684,19 @@ int MainDialog::addLineFood()
 	combo4 = new wxGridCellChoiceEditor(location5,false);
 	combo5 = new wxGridCellChoiceEditor(location6,false);	
 	comboUnit = new wxGridCellChoiceEditor(unit,false);
+	comboPriority = new wxGridCellChoiceEditor(prioritystr,false);
+
 	boolEditor = new wxGridCellBoolEditor();
-	
+	if(!pPlugin->buyNo)
+		boolEditor->UseStringValues(_("Yes"));
+	else
+		boolEditor->UseStringValues(_("Yes"),_("No"));
+
 	int lastRow = this->m_gridFood->GetNumberRows();
 	this->m_gridFood->AppendRows();
 	
 	this->m_gridFood->SetCellEditor(lastRow,BUY,boolEditor);
+	this->m_gridFood->SetCellEditor(lastRow,PRIORITY,comboPriority);
 	this->m_gridFood->SetCellEditor(lastRow,UNIT,comboUnit);	
 	this->m_gridFood->SetCellEditor(lastRow,LOC1,combo);
 	this->m_gridFood->SetCellEditor(lastRow,LOC2,combo1);
@@ -598,6 +711,7 @@ int MainDialog::addLineFood()
 	this->m_gridFood->SetCellAlignment(wxALIGN_CENTER,lastRow,PRIORITY);
 	this->m_gridFood->SetCellAlignment(wxALIGN_RIGHT,lastRow,QUOTA);
 	this->m_gridFood->SetCellAlignment(wxALIGN_RIGHT,lastRow,ACTUELL);
+	this->m_gridFood->SetCellAlignment(wxALIGN_RIGHT,lastRow,TOBUY);
 
 	return lastRow;	
 }
@@ -612,12 +726,18 @@ int MainDialog::addLineMaterial()
 	combo5 = new wxGridCellChoiceEditor(location6,false);	
 	comboUnit = new wxGridCellChoiceEditor(unit,false);
 	boolEditor = new wxGridCellBoolEditor();
-	boolEditor->UseStringValues(_("Yes"));
+	comboPriority = new wxGridCellChoiceEditor(prioritystr,false);
+
+	if(!pPlugin->buyNo)
+		boolEditor->UseStringValues(_("Yes"));
+	else
+		boolEditor->UseStringValues(_("Yes"),_("No"));
 
 	int lastRow = this->m_gridMaterial->GetNumberRows();
 	this->m_gridMaterial->AppendRows();
 
 	this->m_gridMaterial->SetCellEditor(lastRow,BUY,boolEditor);
+	this->m_gridMaterial->SetCellEditor(lastRow,PRIORITY,comboPriority);
 	this->m_gridMaterial->SetCellEditor(lastRow,UNIT,comboUnit);	
 	this->m_gridMaterial->SetCellEditor(lastRow,LOC1,combo);
 	this->m_gridMaterial->SetCellEditor(lastRow,LOC2,combo1);
@@ -632,6 +752,7 @@ int MainDialog::addLineMaterial()
 	this->m_gridMaterial->SetCellAlignment(wxALIGN_CENTER,lastRow,PRIORITY);
 	this->m_gridMaterial->SetCellAlignment(wxALIGN_RIGHT,lastRow,QUOTA);
 	this->m_gridMaterial->SetCellAlignment(wxALIGN_RIGHT,lastRow,ACTUELL);
+	this->m_gridMaterial->SetCellAlignment(wxALIGN_RIGHT,lastRow,TOBUY);
 
 	return lastRow;	
 }
@@ -885,8 +1006,32 @@ void MainDialog::loadData()
 			
 			for(int i = 0; i < this->m_gridMaterial->GetNumberCols(); i++)
 			{
-				data = wxString(pnode->Attribute(wxString::Format(_T("c%i"),i).mb_str()),wxConvUTF8); 
-				this->m_gridMaterial->SetCellValue(lastRow,i,data);
+                if(i == BUY)
+				{
+					data = wxString(pnode->Attribute(wxString::Format(_T("c%i"),i).mb_str()),wxConvUTF8); 
+					if(pPlugin->buyNo)
+					{
+						if(data == _T(""))
+							this->m_gridMaterial->SetCellValue(lastRow,BUY,_("No"));
+						else
+							this->m_gridMaterial->SetCellValue(lastRow,BUY,data);
+						continue;
+					}
+					else
+					{
+						if(data == _("No"))
+							this->m_gridMaterial->SetCellValue(lastRow,BUY,_T(""));
+						else
+							this->m_gridMaterial->SetCellValue(lastRow,BUY,data);
+						continue;
+					}
+				}
+
+				if(i != TOBUY)
+				{
+					data = wxString(pnode->Attribute(wxString::Format(_T("c%i"),i).mb_str()),wxConvUTF8); 
+					this->m_gridMaterial->SetCellValue(lastRow,i,data);
+				}
 			}
 		}
 
@@ -910,11 +1055,77 @@ void MainDialog::loadData()
 			
 			for(int i = 0; i < this->m_gridFood->GetNumberCols(); i++)
 			{
-				data = wxString(pnode->Attribute(wxString::Format(_T("c%i"),i).mb_str()),wxConvUTF8); 
-				this->m_gridFood->SetCellValue(lastRow,i,data);
+                if(i == BUY)
+				{
+					data = wxString(pnode->Attribute(wxString::Format(_T("c%i"),i).mb_str()),wxConvUTF8); 
+					if(pPlugin->buyNo)
+					{
+						if(data == _T(""))
+							this->m_gridFood->SetCellValue(lastRow,BUY,_("No"));
+						else
+							this->m_gridFood->SetCellValue(lastRow,BUY,data);
+						continue;
+					}
+					else
+					{
+						if(data == _("No"))
+							this->m_gridFood->SetCellValue(lastRow,BUY,_T(""));
+						else
+							this->m_gridFood->SetCellValue(lastRow,BUY,data);
+						continue;
+					}
+				}
+				if(i != TOBUY)
+				{
+					data = wxString(pnode->Attribute(wxString::Format(_T("c%i"),i).mb_str()),wxConvUTF8); 
+					this->m_gridFood->SetCellValue(lastRow,i,data);
+				}
 			}
 		}
-	this->Refresh();
+
+	for(int row = 0; row < this->m_gridMaterial->GetNumberRows(); row++)
+		for(int col = QUOTA; col < UNIT; col++)
+		{
+					int quota = wxAtoi(m_gridMaterial->GetCellValue(row,QUOTA));
+					int actuell = wxAtoi(m_gridMaterial->GetCellValue(row,ACTUELL));
+					if(actuell < quota)
+					{ 
+						int diff = quota - actuell;						
+						this->m_gridMaterial->SetCellValue(row,TOBUY,wxString::Format(_("%i"),diff));
+						this->m_gridMaterial->SetCellValue(row,BUY,_("Yes"));
+					}
+					else
+					{
+						if(pPlugin->toBuyZero)
+							this->m_gridMaterial->SetCellValue(row,TOBUY,_T("0"));
+						if(pPlugin->buyNo)
+							this->m_gridMaterial->SetCellValue(row,BUY,_("No"));
+						else
+							this->m_gridMaterial->SetCellValue(row,BUY,_T(""));
+					}
+		}
+
+	for(int row = 0; row < this->m_gridFood->GetNumberRows(); row++)
+		for(int col = QUOTA; col < UNIT; col++)
+		{
+					int quota = wxAtoi(m_gridFood->GetCellValue(row,QUOTA));
+					int actuell = wxAtoi(m_gridFood->GetCellValue(row,ACTUELL));
+					if(actuell < quota)
+					{ 
+						int diff = quota - actuell;						
+						this->m_gridFood->SetCellValue(row,TOBUY,wxString::Format(_("%i"),diff));
+						this->m_gridFood->SetCellValue(row,BUY,_("Yes"));
+					}
+					else
+					{
+						if(pPlugin->toBuyZero)
+							this->m_gridFood->SetCellValue(row,TOBUY,_T("0"));
+						if(pPlugin->buyNo)
+							this->m_gridFood->SetCellValue(row,BUY,_("No"));
+						else
+							this->m_gridFood->SetCellValue(row,BUY,_T(""));
+					}
+		}
 }
 
 //////////////////////////// myGridStringTable /////////

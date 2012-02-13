@@ -34,12 +34,15 @@
 #endif //precompiled headers
 
 #include <wx/aui/aui.h>
+#include <wx/fileconf.h>
 
 #include "findit_pi.h"
 #include "icons.h"
 
 #include "jsonval.h"
 #include "jsonreader.h"
+
+#include "gui.h"
 
 // the class factories, used to create and destroy instances of the PlugIn
 
@@ -84,20 +87,24 @@ int findit_pi::Init(void)
       // Get a pointer to the opencpn display canvas, to use as a parent for windows created
       m_parent_window = GetOCPNCanvasWindow();
 
+	  m_pconfig = GetOCPNConfigObject();
+	  LoadConfig();
+
       // Create the Context Menu Items
 
       //    In order to avoid an ASSERT on msw debug builds,
       //    we need to create a dummy menu to act as a surrogate parent of the created MenuItems
       //    The Items will be re-parented when added to the real context meenu
       wxMenu dummy_menu;
-	  m_bLOGShowIcon = true;
-	  if(m_bLOGShowIcon)
+	  m_bFINDITShowIcon = true;
+	  if(m_bFINDITShowIcon)
             m_leftclick_tool_id  = InsertPlugInTool(_T(""), _img_layermanager, _img_layermanager, wxITEM_NORMAL,
                   _("FindIt"), _T(""), NULL,
                    FINDIT_TOOL_POSITION, 0, this);
 
       return (
 			WANTS_TOOLBAR_CALLBACK    |
+		    WANTS_PREFERENCES         |
 //			INSTALLS_CONTEXTMENU_ITEMS |
 			WANTS_PLUGIN_MESSAGING 
             );
@@ -120,11 +127,7 @@ void findit_pi::SetPluginMessage(wxString &message_id, wxString &message_body)
 		this->isLogbookReady = (message_body == _T("TRUE"))?true:false;
 
 		if(m_pFindItWindow)
-		{
-			m_pFindItWindow->m_buttonBuyItMaterial->Enable(this->isLogbookReady);
-			m_pFindItWindow->m_buttonBuyItFood->Enable(this->isLogbookReady);
-			m_pFindItWindow->Refresh();
-		}
+			m_pFindItWindow->setLogbookColumns(isLogbookReady);
 	}
 	else if(message_id == _T("LOGBOOK_WINDOW_SHOWN"))
 	{
@@ -183,8 +186,6 @@ void findit_pi::OnToolbarToolCallback(int id)
 			m_pFindItWindow->Iconize(false);
 	}
 	
-	m_pFindItWindow->m_buttonBuyItMaterial->Enable(this->isLogbookReady);
-	m_pFindItWindow->m_buttonBuyItFood->Enable(this->isLogbookReady);
 	m_pFindItWindow->Show(); 
 	m_pFindItWindow->SetFocus();
 }
@@ -192,9 +193,9 @@ void findit_pi::OnToolbarToolCallback(int id)
 void findit_pi::SetDefaults(void)
 {
       // If the config somehow says NOT to show the icon, override it so the user gets good feedback
-      if(!m_bLOGShowIcon)
+      if(!m_bFINDITShowIcon)
       {
-            m_bLOGShowIcon = true;
+            m_bFINDITShowIcon = true;
 
             m_leftclick_tool_id  = InsertPlugInTool(_T(""), _img_layermanager, _img_layermanager, wxITEM_NORMAL,
                   _("FindIt"), _T(""), NULL,
@@ -207,4 +208,80 @@ void findit_pi::UpdateAuiStatus(void)
 {
 
 }
+
+void findit_pi::ShowPreferencesDialog( wxWindow* parent )
+{
+	int buyNotemp = buyNo;
+	int  toBuyZerotemp = toBuyZero;
+	int lastRowDefaulttemp = lastRowDefault;
+
+	OptionsDialog* dlg = new OptionsDialog(parent,this);
+
+//	dlg->m_checkBoxShowLogbook->SetValue(m_bLOGShowIcon);
+
+     if(dlg->ShowModal() == wxID_OK)
+      {
+			buyNo = dlg->m_radioBox11->GetSelection();
+			toBuyZero = dlg->m_radioBox1->GetSelection();
+			lastRowDefault = dlg->m_radioBox5->GetSelection();
+
+			if((buyNo != buyNotemp) || (toBuyZero != toBuyZerotemp) || (lastRowDefault != lastRowDefaulttemp))
+				if(m_pFindItWindow)
+					m_pFindItWindow->reloadData();
+
+            //    Show Icon changed value?	
+			if(m_bFINDITShowIcon != dlg->m_checkBoxFindItIcon->GetValue())
+            {
+                  m_bFINDITShowIcon = dlg->m_checkBoxFindItIcon->GetValue();
+
+                  if(m_bFINDITShowIcon)
+						 m_leftclick_tool_id  = InsertPlugInTool(_T(""), _img_layermanager, _img_layermanager, wxITEM_NORMAL,
+								 _("FindIt"), _T(""), NULL, FINDIT_TOOL_POSITION, 0, this);
+                  else
+                        RemovePlugInTool(m_leftclick_tool_id);
+            }
+            SaveConfig();
+      }
+	 else
+	 {
+			if(buyNo != buyNotemp || toBuyZero != toBuyZerotemp || lastRowDefault != lastRowDefaulttemp)
+				if(m_pFindItWindow)
+					m_pFindItWindow->reloadData();
+	 }
+	 delete dlg;
+}
+
+void findit_pi::SaveConfig()
+{
+      if(m_pconfig)
+      {
+			m_pconfig->SetPath ( _T ( "/PlugIns/FindIt" ) );
+			m_pconfig->Write ( _T( "ShowFindItIcon" ), m_bFINDITShowIcon );
+			m_pconfig->Write ( _T( "buyNo" ), buyNo );
+			m_pconfig->Write ( _T( "toBuyZero" ), toBuyZero );
+			m_pconfig->Write ( _T( "lastRowDefault" ), lastRowDefault );
+	  }
+}
+
+void findit_pi::LoadConfig()
+{
+      if(m_pconfig)
+      {
+            m_pconfig->SetPath ( _T( "/PlugIns/FindIt" ) );
+            m_pconfig->Read ( _T( "ShowFindItIcon" ),  &m_bFINDITShowIcon, 1 );
+			m_pconfig->Read ( _T( "buyNo" ),  &buyNo, 0 );
+			m_pconfig->Read ( _T( "toBuyZero" ),  &toBuyZero, 0 );
+			m_pconfig->Read ( _T( "lastRowDefault" ), &lastRowDefault, 0 );
+	  }
+}
+//////////////////////OptionsDialog ////////////////////
+////////////////////////////////////////////////////////
+void OptionsDialog::OnInitDialog(wxInitDialogEvent& event)
+{
+	this->m_checkBoxFindItIcon->SetValue(parent->m_bFINDITShowIcon);
+	this->m_radioBox1->SetSelection(parent->toBuyZero);
+	this->m_radioBox11->SetSelection(parent->buyNo);
+	this->m_radioBox5->SetSelection(parent->lastRowDefault);
+}
+
 
