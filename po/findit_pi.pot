@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: findit_pi 2.6.1310\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-12 16:14+0100\n"
+"POT-Creation-Date: 2012-02-17 13:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,16 +16,16 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/findit_pi.cpp:102 src/findit_pi.cpp:168 src/findit_pi.cpp:207
-#: src/findit_pi.cpp:245 src/gui.h:101
+#: src/findit_pi.cpp:102 src/findit_pi.cpp:164 src/findit_pi.cpp:201
+#: src/findit_pi.cpp:239 src/gui.h:101
 msgid "FindIt"
 msgstr ""
 
-#: src/findit_pi.cpp:173
+#: src/findit_pi.cpp:169
 msgid "Stowage PlugIn for OpenCPN"
 msgstr ""
 
-#: src/findit_pi.cpp:178
+#: src/findit_pi.cpp:174
 msgid "Stowage PlugIn for OpenCPN\n"
 msgstr ""
 
@@ -77,8 +77,8 @@ msgstr ""
 msgid "Actuell"
 msgstr ""
 
-#: src/gui.cpp:78
-msgid "To Buy"
+#: src/gui.cpp:78 src/gui.cpp:163
+msgid "Balance"
 msgstr ""
 
 #: src/gui.cpp:79 src/gui.cpp:164 src/gui.cpp:267
@@ -99,10 +99,6 @@ msgstr ""
 
 #: src/gui.cpp:104
 msgid "Material"
-msgstr ""
-
-#: src/gui.cpp:163
-msgid "Balance"
 msgstr ""
 
 #: src/gui.cpp:188
@@ -126,7 +122,7 @@ msgid "blank"
 msgstr ""
 
 #: src/gui.cpp:387
-msgid "If Value of Column \"To Buy\" = 0, set Value to"
+msgid "If Value of Column \"Balance\" = 0, set Value to"
 msgstr ""
 
 #: src/gui.cpp:391

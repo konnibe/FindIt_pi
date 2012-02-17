@@ -2,28 +2,30 @@ msgid ""
 msgstr ""
 "Project-Id-Version: findit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-12 03:40+0100\n"
-"PO-Revision-Date: 2012-02-12 03:40+0100\n"
+"POT-Creation-Date: 2012-02-17 13:44+0100\n"
+"PO-Revision-Date: 2012-02-17 14:15+0100\n"
 "Last-Translator: Konni <konnibe@hotmail.de>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
-"X-Poedit-Basepath: C:\\Users\\Konni\\Documents\\Visual Studio 2010\\Projects"
-"\\opencpn\\plugins\\FindIt_pi\\src\n"
+"X-Poedit-Basepath: C:\\Users\\Konni\\Documents\\Visual Studio 2010\\Projects\\opencpn\\plugins\\FindIt_pi\\src\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-SearchPath-0: C:\\Users\\Konni\\Documents\\Visual Studio 2010"
-"\\Projects\\opencpn\\plugins\\FindIt_pi\\src\n"
+"X-Poedit-SearchPath-0: C:\\Users\\Konni\\Documents\\Visual Studio 2010\\Projects\\opencpn\\plugins\\FindIt_pi\\src\n"
+
 #
 msgid "\"No\""
 msgstr "\"Nein\""
+
 #
 msgid "Actuell"
 msgstr "Ist"
+
 #
 msgid "Add Line"
 msgstr "Zeile hinzufügen"
+
 #
 msgid ""
 "Append a row\n"
@@ -31,30 +33,39 @@ msgid ""
 msgstr ""
 "Zeile anfügen\n"
 "Zeile löschen = Taste <Entf>"
+
 #
 msgid "Balance"
 msgstr "Differenz"
+
 #
 msgid "Buy"
 msgstr "Kaufe"
+
 #
 msgid "Buy it"
 msgstr "Kaufe es"
+
 #
 msgid "Enter Searchstring:"
 msgstr "Suchbegriff eingeben:"
+
 #
 msgid "FindIt"
 msgstr ""
+
 #
 msgid "FindIt Options"
 msgstr "FindIt Optionen"
+
+#
+msgid "If Value of Column \"Balance\" = 0, set Value to"
+msgstr "Wenn Spalte \"Differenz\" = 0, setze"
+
 #
 msgid "If Value of Column \"Buy\" = No, set Value to"
 msgstr "Wenn Spalte \"Kaufe\" = Nein, setze ein"
-#
-msgid "If Value of Column \"To Buy\" = 0, set Value to"
-msgstr "Wenn Spalte \"Differenz\" = 0, setze"
+
 #
 msgid ""
 "If the logbook-plugin is installed send a list\n"
@@ -62,57 +73,72 @@ msgid ""
 msgstr ""
 "Wenn das Logbuch-Plugin installiert/aktiviert wurde\n"
 "sende eine Liste mit Einträgen zu 'Logbuch/Instandhaltung/Kaufe Teile'"
+
 #
 msgid "Location"
 msgstr "Stauraum"
+
 #
 msgid "Locations"
 msgstr "Stauräume"
+
 #
 msgid "Material"
-msgstr ""
+msgstr "Material"
+
 #
 msgid "No"
 msgstr "Nein"
+
 #
 msgid "Priority"
 msgstr "Priorität"
+
 #
 msgid "Provisions"
 msgstr "Proviant"
+
 #
 msgid "Quota"
 msgstr "Soll"
+
 #
 msgid "Separate more than one string with a blank"
 msgstr "mehrere Suchbegriffe durch Leertaste trennen"
+
 #
 msgid "Show FindIt Icon"
 msgstr "Zeige FindIt Icon"
+
 #
 msgid "Stowage PlugIn for OpenCPN"
 msgstr "Stauraum-Plugin für OpenCPN"
+
 #
 msgid "Stowage PlugIn for OpenCPN\n"
 msgstr "Stauraum-Plugin für OpenCPN\n"
+
 #
 msgid "Text"
 msgstr ""
-#
-msgid "To Buy"
-msgstr "Differenz"
+
 #
 msgid "Unit"
 msgstr "Einheit"
+
 #
 msgid "Units"
 msgstr "Einheiten"
+
 #
 msgid "Use last row values  as default for new row"
 msgstr "Setze die Beträge der letzten Zeile in neue Zeile"
+
 #
 msgid "Yes"
 msgstr "Ja"
+
 #
 msgid "blank"
 msgstr "Leer"
+

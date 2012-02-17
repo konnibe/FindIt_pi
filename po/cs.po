@@ -1,0 +1,117 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: findit_pi 2.6.1310\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-02-17 13:44+0100\n"
+"PO-Revision-Date: 2012-02-17 13:45+0100\n"
+"Last-Translator: Konni <konnibe@hotmail.de>\n"
+"Language-Team: Pavel Kalian <pavel@kalian.cz>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Czech\n"
+"X-Poedit-Country: CZECH REPUBLIC\n"
+"X-Poedit-SourceCharset: utf-8\n"
+#
+msgid "\"No\""
+msgstr "\"Ne\""
+#
+msgid "Actuell"
+msgstr "Aktuálně"
+#
+msgid "Add Line"
+msgstr "Přidat řádek"
+#
+msgid ""
+"Append a row\n"
+"Delete a row = Key <Del>"
+msgstr ""
+"Přidat řádek\n"
+"Smazat řádek = Klávesa <Del>"
+#
+msgid "Balance"
+msgstr "Bilance"
+#
+msgid "Buy"
+msgstr "Koupit"
+#
+msgid "Buy it"
+msgstr "Kup to"
+#
+msgid "Enter Searchstring:"
+msgstr "Zadej vyhledávací řetězec:"
+#
+msgid "FindIt"
+msgstr "FindIt"
+#
+msgid "FindIt Options"
+msgstr "Nastavení FindIt"
+#
+msgid "If Value of Column \"Balance\" = 0, set Value to"
+msgstr "Pokud hodnota sloupce \"Bilance\" = 0, nastav hodnotu na"
+#
+msgid "If Value of Column \"Buy\" = No, set Value to"
+msgstr "Pokud hodnota sloupce \"Koupit\" = Ne, nastav hodnotu na"
+#
+msgid ""
+"If the logbook-plugin is installed send a list\n"
+"with checked items to 'Logbook/Maintenace/Buy Parts'"
+msgstr ""
+"Pokud je instalován doplněk lodní deník, pošli seznam\n"
+"zaškrtnutých položek do 'Logbook/Údržba/Koupit díly'"
+#
+msgid "Location"
+msgstr "Umístění"
+#
+msgid "Locations"
+msgstr "Umístění"
+#
+msgid "Material"
+msgstr "Materiál"
+#
+msgid "No"
+msgstr "Ne"
+#
+msgid "Priority"
+msgstr "Priorita"
+#
+msgid "Provisions"
+msgstr "Potraviny"
+#
+msgid "Quota"
+msgstr "Kvóta"
+#
+msgid "Separate more than one string with a blank"
+msgstr "Více než jeden řetězec odděl mezerou"
+#
+msgid "Show FindIt Icon"
+msgstr "Zobraz ikonu FindIt"
+#
+msgid "Stowage PlugIn for OpenCPN"
+msgstr "Skladovací doplněk pro OpenCPN"
+#
+msgid "Stowage PlugIn for OpenCPN\n"
+msgstr "Skladovací doplněk pro OpenCPN\n"
+#
+msgid "Text"
+msgstr "Text"
+#
+msgid "Unit"
+msgstr "Jednotka"
+#
+msgid "Units"
+msgstr "Jednotky"
+#
+msgid "Use last row values  as default for new row"
+msgstr "Použij hodnoty poslední řádky jako výchozí pro novou"
+#
+msgid "Yes"
+msgstr "Ano"
+#
+msgid "blank"
+msgstr "mezera"

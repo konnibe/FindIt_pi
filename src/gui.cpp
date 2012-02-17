@@ -384,7 +384,7 @@ OptionsDialog::OptionsDialog( wxWindow* parent, findit_pi* p, wxWindowID id, con
 	
 	wxString m_radioBox1Choices[] = { _("blank"), _T("\"0\"") };
 	int m_radioBox1NChoices = sizeof( m_radioBox1Choices ) / sizeof( wxString );
-	m_radioBox1 = new wxRadioBox( this, wxID_ANY, _("If Value of Column \"To Buy\" = 0, set Value to"), wxDefaultPosition, wxDefaultSize, m_radioBox1NChoices, m_radioBox1Choices, 1, wxRA_SPECIFY_ROWS|wxRA_USE_CHECKBOX );
+	m_radioBox1 = new wxRadioBox( this, wxID_ANY, _("If Value of Column \"Balance\" = 0, set Value to"), wxDefaultPosition, wxDefaultSize, m_radioBox1NChoices, m_radioBox1Choices, 1, wxRA_SPECIFY_ROWS|wxRA_USE_CHECKBOX );
 	m_radioBox1->SetSelection( 0 );
 	fgSizer1->Add( m_radioBox1, 0, wxALL, 5 );
 	
@@ -420,6 +420,8 @@ OptionsDialog::OptionsDialog( wxWindow* parent, findit_pi* p, wxWindowID id, con
 	
 	// Connect Events
 	this->Connect( wxEVT_INIT_DIALOG, wxInitDialogEventHandler( OptionsDialog::OnInitDialog ) );
+
+	this->Fit();
 }
 
 OptionsDialog::~OptionsDialog()

@@ -2,7 +2,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "findit_pi"
-!define PRODUCT_VERSION "0."
+!define PRODUCT_VERSION "0.5"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 XPStyle on
@@ -13,6 +13,9 @@ RequestExecutionLevel admin
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
 OutFile "FindIt-Setup.exe"
 LoadLanguageFile "${NSISDIR}\Contrib\Language files\Czech.nlf"
+LoadLanguageFile "${NSISDIR}\Contrib\Language files\Dutch.nlf"
+LoadLanguageFile "${NSISDIR}\Contrib\Language files\Russian.nlf"
+LoadLanguageFile "${NSISDIR}\Contrib\Language files\Swedish.nlf"
 LoadLanguageFile "${NSISDIR}\Contrib\Language files\English.nlf"
 LoadLanguageFile "${NSISDIR}\Contrib\Language files\French.nlf"
 LoadLanguageFile "${NSISDIR}\Contrib\Language files\German.nlf"
@@ -101,20 +104,20 @@ Function .onInit
 	Push ""
 	Push ${LANG_ENGLISH}
 	Push English
-;	Push ${LANG_DUTCH}
-;	Push Dutch
+	Push ${LANG_DUTCH}
+	Push Dutch
 	Push ${LANG_FRENCH}
 	Push French
 	Push ${LANG_GERMAN}
 	Push German
 	Push ${LANG_POLISH}
 	Push Polish
-;	Push ${LANG_RUSSIAN}
-;	Push Russian
+	Push ${LANG_RUSSIAN}
+	Push Russian
 	Push ${LANG_SPANISH}
 	Push Spanish
-;	Push ${LANG_SWEDISH}
-;	Push Swedish
+	Push ${LANG_SWEDISH}
+	Push Swedish
 	Push ${LANG_DANISH}
 	Push Danish
 ;	Push ${LANG_TRADCHINESE}
@@ -140,8 +143,8 @@ Section "DLL" SEC01
 SectionEnd
 
 Section "Languages" SEC02
-;   SetOutPath "$INSTDIR\share\locale\cs\LC_MESSAGES\"
-;   File "C:\Program Files (x86)\OpenCPN\share\locale\cs\LC_MESSAGES\opencpn-logbookkonni_pi.mo"
+   SetOutPath "$INSTDIR\share\locale\cs\LC_MESSAGES\"
+   File "C:\Program Files (x86)\OpenCPN\share\locale\cs\LC_MESSAGES\opencpn-findit_pi.mo"
    SetOutPath "$INSTDIR\share\locale\de\LC_MESSAGES\"
    File "C:\Program Files (x86)\OpenCPN\share\locale\de\LC_MESSAGES\opencpn-findit_pi.mo"
 ;   SetOutPath "$INSTDIR\share\locale\fr\LC_MESSAGES\"

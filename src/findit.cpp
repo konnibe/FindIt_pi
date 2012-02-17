@@ -343,7 +343,7 @@ void MainDialog::OnButtonClickBuyFood( wxCommandEvent& event )
 		{
 			this->m_gridFood->GetCellValue(i,PRIORITY).ToLong(&val);
 			v[ind][_T("Priority")] = (int) val;
-			v[ind][_T("Category")] = _T("Food");
+			v[ind][_T("Category")] = _("Provisions");
 			v[ind][_T("PluginName")] = _T("FindIt");
 			this->m_gridFood->GetCellValue(i,TOBUY).ToLong(&tobuy);
 			v[ind][_T("Amount")] = tobuy;
@@ -378,7 +378,7 @@ void MainDialog::OnButtonClickBuyMaterial( wxCommandEvent& event )
 		{
 			this->m_gridMaterial->GetCellValue(i,PRIORITY).ToLong(&val);
 			v[ind][_T("Priority")] = (int) val;
-			v[ind][_T("Category")] = _T("Material");
+			v[ind][_T("Category")] = _("Material");
 			v[ind][_T("PluginName")] = _T("FindIt");
 			this->m_gridMaterial->GetCellValue(i,TOBUY).ToLong(&tobuy);
 			v[ind][_T("Amount")] = tobuy;
