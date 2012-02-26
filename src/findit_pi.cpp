@@ -178,6 +178,7 @@ wxString findit_pi::GetLongDescription()
 
 void findit_pi::OnToolbarToolCallback(int id)
 {
+	SendPluginMessage(_T("LOGBOOK_IS_READY_FOR_REQUEST"), wxEmptyString);
 	if(NULL == m_pFindItWindow)
 		m_pFindItWindow = new MainDialog(this->m_parent_window,this);
 	else
