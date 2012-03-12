@@ -37,7 +37,7 @@
 #endif //precompiled headers
 
 #define     PLUGIN_VERSION_MAJOR    0
-#define     PLUGIN_VERSION_MINOR    5
+#define     PLUGIN_VERSION_MINOR    7
 
 #define     MY_API_VERSION_MAJOR    1
 //#define     MY_API_VERSION_MINOR    5  // for OpenCPN 2.5
@@ -52,10 +52,11 @@ class findit_pi;
 //----------------------------------------------------------------------------------------------------------
 
 
-class findit_pi : public opencpn_plugin
+class findit_pi : public opencpn_plugin_16
 {
 public:
-      findit_pi(void *ppimgr):opencpn_plugin(ppimgr){}
+      findit_pi(void *ppimgr);//:opencpn_plugin(ppimgr){}
+	  ~findit_pi();
 
 //    The required PlugIn Methods
       int Init(void);
@@ -65,6 +66,7 @@ public:
       int GetAPIVersionMinor();
       int GetPlugInVersionMajor();
       int GetPlugInVersionMinor();
+	  wxBitmap* GetPlugInBitmap();
 
       wxString GetCommonName();
       wxString GetShortDescription();

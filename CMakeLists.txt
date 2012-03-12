@@ -59,15 +59,15 @@ SET(SRC_FINDIT
 	src/findit.h
 	src/icons.cpp
 	src/icons.h
-        src/gui.cpp
+    src/gui.cpp
 	src/gui.h
-        src/json_defs.h
-        src/jsonreader.h
-        src/jsonval.h
-        src/jsonwriter.h
-        src/jsonreader.cpp
-        src/jsonval.cpp
-        src/jsonwriter.cpp
+    src/json_defs.h
+    src/jsonreader.h
+    src/jsonval.h
+    src/jsonwriter.h
+    src/jsonreader.cpp
+    src/jsonval.cpp
+    src/jsonwriter.cpp
 	src/tinyxml/tinyxml.cpp
 	src/tinyxml/tinyxml.h
 	src/tinyxml/tinystr.cpp

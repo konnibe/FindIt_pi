@@ -37,12 +37,10 @@
 #include <wx/fileconf.h>
 
 #include "findit_pi.h"
-#include "icons.h"
-
 #include "jsonval.h"
 #include "jsonreader.h"
-
 #include "gui.h"
+#include "icons.h"
 
 // the class factories, used to create and destroy instances of the PlugIn
 
@@ -57,17 +55,16 @@ extern "C" DECL_EXP void destroy_pi(opencpn_plugin* p)
 }
 
 
+findit_pi::findit_pi(void *ppimgr)
+      :opencpn_plugin_16(ppimgr)
+{	
+      // Create the PlugIn icons
+      initialize_images();
+}
 
-
-
-//---------------------------------------------------------------------------------------------------------
-//
-//    Demo PlugIn Implementation
-//
-//---------------------------------------------------------------------------------------------------------
-
-
-
+findit_pi::~findit_pi()
+{
+}
 //---------------------------------------------------------------------------------------------------------
 //
 //          PlugIn initialization and de-init
@@ -78,7 +75,6 @@ int findit_pi::Init(void)
 {
 	  AddLocaleCatalog( _T("opencpn-findit_pi") );
 
-      initialize_images();
       m_pFindItWindow = NULL;
 
 	  isLogbookReady = FALSE;;
@@ -98,14 +94,13 @@ int findit_pi::Init(void)
       wxMenu dummy_menu;
 	  m_bFINDITShowIcon = true;
 	  if(m_bFINDITShowIcon)
-            m_leftclick_tool_id  = InsertPlugInTool(_T(""), _img_layermanager, _img_layermanager, wxITEM_NORMAL,
+            m_leftclick_tool_id  = InsertPlugInTool(_T(""), _img_findit, _img_findit, wxITEM_NORMAL,
                   _("FindIt"), _T(""), NULL,
                    FINDIT_TOOL_POSITION, 0, this);
 
       return (
 			WANTS_TOOLBAR_CALLBACK    |
 		    WANTS_PREFERENCES         |
-//			INSTALLS_CONTEXTMENU_ITEMS |
 			WANTS_PLUGIN_MESSAGING 
             );
 }
@@ -176,8 +171,14 @@ wxString findit_pi::GetLongDescription()
 
 }
 
+wxBitmap *findit_pi::GetPlugInBitmap()
+{
+      return _img_findit_pi;
+}
+
 void findit_pi::OnToolbarToolCallback(int id)
 {
+	SendPluginMessage(_T("LOGBOOK_IS_READY_FOR_REQUEST"), wxEmptyString);
 	if(NULL == m_pFindItWindow)
 		m_pFindItWindow = new MainDialog(this->m_parent_window,this);
 	else
@@ -197,7 +198,7 @@ void findit_pi::SetDefaults(void)
       {
             m_bFINDITShowIcon = true;
 
-            m_leftclick_tool_id  = InsertPlugInTool(_T(""), _img_layermanager, _img_layermanager, wxITEM_NORMAL,
+            m_leftclick_tool_id  = InsertPlugInTool(_T(""), _img_findit, _img_findit, wxITEM_NORMAL,
                   _("FindIt"), _T(""), NULL,
                    FINDIT_TOOL_POSITION, 0, this);
 				   
@@ -235,7 +236,7 @@ void findit_pi::ShowPreferencesDialog( wxWindow* parent )
                   m_bFINDITShowIcon = dlg->m_checkBoxFindItIcon->GetValue();
 
                   if(m_bFINDITShowIcon)
-						 m_leftclick_tool_id  = InsertPlugInTool(_T(""), _img_layermanager, _img_layermanager, wxITEM_NORMAL,
+						 m_leftclick_tool_id  = InsertPlugInTool(_T(""), _img_findit, _img_findit, wxITEM_NORMAL,
 								 _("FindIt"), _T(""), NULL, FINDIT_TOOL_POSITION, 0, this);
                   else
                         RemovePlugInTool(m_leftclick_tool_id);

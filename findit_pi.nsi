@@ -2,7 +2,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "findit_pi"
-!define PRODUCT_VERSION "0.5"
+!define PRODUCT_VERSION "0.6"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 XPStyle on
@@ -147,12 +147,12 @@ Section "Languages" SEC02
    File "C:\Program Files (x86)\OpenCPN\share\locale\cs\LC_MESSAGES\opencpn-findit_pi.mo"
    SetOutPath "$INSTDIR\share\locale\de\LC_MESSAGES\"
    File "C:\Program Files (x86)\OpenCPN\share\locale\de\LC_MESSAGES\opencpn-findit_pi.mo"
-;   SetOutPath "$INSTDIR\share\locale\fr\LC_MESSAGES\"
-;   File "C:\Program Files (x86)\OpenCPN\share\locale\fr\LC_MESSAGES\opencpn-logbookkonni_pi.mo"
+   SetOutPath "$INSTDIR\share\locale\fr\LC_MESSAGES\"
+   File "C:\Program Files (x86)\OpenCPN\share\locale\fr\LC_MESSAGES\opencpn-logbookkonni_pi.mo"
 ;   SetOutPath "$INSTDIR\share\locale\es\LC_MESSAGES\"
 ;   File "C:\Program Files (x86)\OpenCPN\share\locale\es\LC_MESSAGES\opencpn-logbookkonni_pi.mo"
-;   SetOutPath "$INSTDIR\share\locale\da\LC_MESSAGES\"
-;   File "C:\Program Files (x86)\OpenCPN\share\locale\da\LC_MESSAGES\opencpn-logbookkonni_pi.mo"
+   SetOutPath "$INSTDIR\share\locale\da\LC_MESSAGES\"
+   File "C:\Program Files (x86)\OpenCPN\share\locale\da\LC_MESSAGES\opencpn-logbookkonni_pi.mo"
 ;   SetOutPath "$INSTDIR\share\locale\pl\LC_MESSAGES\"
 ;   File "C:\Program Files (x86)\OpenCPN\share\locale\pl\LC_MESSAGES\opencpn-logbookkonni_pi.mo"
 SectionEnd
