@@ -1,0 +1,114 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: findit_pi 2.6.1310\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-02-17 13:44+0100\n"
+"PO-Revision-Date: 2012-02-26 06:43+0100\n"
+"Last-Translator: Jacob Handrup <jacob@familienhandrup.dk>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+#
+msgid "\"No\""
+msgstr "\"Nej\""
+#
+msgid "Actuell"
+msgstr "Aktuel"
+#
+msgid "Add Line"
+msgstr "Tilføj Linje"
+#
+msgid ""
+"Append a row\n"
+"Delete a row = Key <Del>"
+msgstr ""
+"Tilføj en række\n"
+"Slet en række = Tast <Del>"
+#
+msgid "Balance"
+msgstr "Balance"
+#
+msgid "Buy"
+msgstr "Køb"
+#
+msgid "Buy it"
+msgstr "Køb det"
+#
+msgid "Enter Searchstring:"
+msgstr "Indtast søgestreng"
+#
+msgid "FindIt"
+msgstr "FindIt"
+#
+msgid "FindIt Options"
+msgstr "FindIt indstillinger"
+#
+msgid "If Value of Column \"Balance\" = 0, set Value to"
+msgstr "Hvis værdi i kolonne \"Balance\" = 0. sæt værdi til"
+#
+msgid "If Value of Column \"Buy\" = No, set Value to"
+msgstr "Hvis værdi af kolonne \"Køb\" = Nej, sæt værdi til"
+#
+msgid ""
+"If the logbook-plugin is installed send a list\n"
+"with checked items to 'Logbook/Maintenace/Buy Parts'"
+msgstr ""
+"Hvis logbook-plugin er installeret send en liste\n"
+"med afmærkede emner til 'Logbog/Vedligehold/Køb dele'"
+#
+msgid "Location"
+msgstr "Placering"
+#
+msgid "Locations"
+msgstr "Placeringer"
+#
+msgid "Material"
+msgstr "Materiale"
+#
+msgid "No"
+msgstr "Nej"
+#
+msgid "Priority"
+msgstr "Prioritet"
+#
+msgid "Provisions"
+msgstr "Forsyninger"
+#
+msgid "Quota"
+msgstr "Kvote"
+#
+msgid "Separate more than one string with a blank"
+msgstr "Adskil mere en en streng med mellemrum"
+#
+msgid "Show FindIt Icon"
+msgstr "Vis FindIt ikon"
+#
+msgid "Stowage PlugIn for OpenCPN"
+msgstr "Stueplan Plug-in til OpenCPN"
+#
+msgid "Stowage PlugIn for OpenCPN\n"
+msgstr "Stueplan Plug-in til OpenCPN\n"
+#
+msgid "Text"
+msgstr "Tekst"
+#
+msgid "Unit"
+msgstr "Enhed"
+#
+msgid "Units"
+msgstr "Enheder"
+#
+msgid "Use last row values  as default for new row"
+msgstr "Brug sidste række som standart for ny række"
+#
+msgid "Yes"
+msgstr "Ja"
+#
+msgid "blank"
+msgstr "ryd"
