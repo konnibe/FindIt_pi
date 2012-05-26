@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: findit_pi 2.6.1310\n"
+"Project-Id-Version: findit_pi 2.6.1723\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-17 13:44+0100\n"
+"POT-Creation-Date: 2012-05-26 19:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,16 +16,16 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/findit_pi.cpp:102 src/findit_pi.cpp:164 src/findit_pi.cpp:201
-#: src/findit_pi.cpp:239 src/gui.h:101
+#: src/findit_pi.cpp:98 src/findit_pi.cpp:159 src/findit_pi.cpp:202
+#: src/findit_pi.cpp:240 src/gui.h:101
 msgid "FindIt"
 msgstr ""
 
-#: src/findit_pi.cpp:169
+#: src/findit_pi.cpp:164
 msgid "Stowage PlugIn for OpenCPN"
 msgstr ""
 
-#: src/findit_pi.cpp:174
+#: src/findit_pi.cpp:169
 msgid "Stowage PlugIn for OpenCPN\n"
 msgstr ""
 
