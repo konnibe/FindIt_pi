@@ -2,7 +2,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "findit_pi"
-!define PRODUCT_VERSION "0.6"
+!define PRODUCT_VERSION "1.0"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 XPStyle on
@@ -22,6 +22,7 @@ LoadLanguageFile "${NSISDIR}\Contrib\Language files\German.nlf"
 LoadLanguageFile "${NSISDIR}\Contrib\Language files\Spanish.nlf"
 LoadLanguageFile "${NSISDIR}\Contrib\Language files\Danish.nlf"
 LoadLanguageFile "${NSISDIR}\Contrib\Language files\Polish.nlf"
+LoadLanguageFile "${NSISDIR}\Contrib\Language files\Turkish.nlf"
 ; License data
 ; Not exactly translated, but it shows what's needed
 /*LicenseLangString myLicenseData ${LANG_ENGLISH} ""
@@ -85,8 +86,8 @@ LangString Message ${LANG_SIMPCHINESE} "Simplified Chinese message"
 LangString Message ${LANG_SLOVAK} "Slovak message"
 */
 
-#InstallDir "$PROGRAMFILES\OpenCPN"
-InstallDir "$PROGRAMFILES"
+InstallDir "$PROGRAMFILES\OpenCPN"
+#InstallDir "$PROGRAMFILES"
 Page directory
 Page instfiles
 Icon "${NSISDIR}\Contrib\Graphics\Icons\modern-install.ico"
@@ -120,6 +121,8 @@ Function .onInit
 	Push Swedish
 	Push ${LANG_DANISH}
 	Push Danish
+	Push ${LANG_TURKISH}
+	Push Turkish
 ;	Push ${LANG_TRADCHINESE}
 ;	Push "Traditional Chinese"
 ;	Push ${LANG_SIMPCHINESE}
@@ -148,13 +151,13 @@ Section "Languages" SEC02
    SetOutPath "$INSTDIR\share\locale\de\LC_MESSAGES\"
    File "C:\Program Files (x86)\OpenCPN\share\locale\de\LC_MESSAGES\opencpn-findit_pi.mo"
    SetOutPath "$INSTDIR\share\locale\fr\LC_MESSAGES\"
-   File "C:\Program Files (x86)\OpenCPN\share\locale\fr\LC_MESSAGES\opencpn-logbookkonni_pi.mo"
+   File "C:\Program Files (x86)\OpenCPN\share\locale\fr\LC_MESSAGES\opencpn-findit_pi.mo"
 ;   SetOutPath "$INSTDIR\share\locale\es\LC_MESSAGES\"
-;   File "C:\Program Files (x86)\OpenCPN\share\locale\es\LC_MESSAGES\opencpn-logbookkonni_pi.mo"
+;   File "C:\Program Files (x86)\OpenCPN\share\locale\es\LC_MESSAGES\opencpn-findit_pi.mo"
    SetOutPath "$INSTDIR\share\locale\da\LC_MESSAGES\"
-   File "C:\Program Files (x86)\OpenCPN\share\locale\da\LC_MESSAGES\opencpn-logbookkonni_pi.mo"
-;   SetOutPath "$INSTDIR\share\locale\pl\LC_MESSAGES\"
-;   File "C:\Program Files (x86)\OpenCPN\share\locale\pl\LC_MESSAGES\opencpn-logbookkonni_pi.mo"
+   File "C:\Program Files (x86)\OpenCPN\share\locale\da\LC_MESSAGES\opencpn-findit_pi.mo"
+   SetOutPath "$INSTDIR\share\locale\tr_TR\LC_MESSAGES\"
+   File "C:\Program Files (x86)\OpenCPN\share\locale\tr_TR\LC_MESSAGES\opencpn-findit_pi.mo"
 SectionEnd
 
 Section "Layouts" SEC03

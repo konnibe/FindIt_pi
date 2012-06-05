@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-17 13:44+0100\n"
+"POT-Creation-Date: 2012-06-04 20:21+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Gilletarom <gilletarom@netpratique.fr>\n"
 "Language-Team: \n"
@@ -58,7 +58,7 @@ msgid ""
 "If the logbook-plugin is installed send a list\n"
 "with checked items to 'Logbook/Maintenace/Buy Parts'"
 msgstr ""
-"Si le plug-in Journal de bord est installé, transférer une liste\n"
+"Si le complément \"Journal de bord\" est installé, transférer une liste\n"
 "avec les articles cochés à 'Livre de bord / Maintenance / Pièces achetées''"
 #
 msgid "Location"
@@ -88,13 +88,13 @@ msgid "Separate more than one string with a blank"
 msgstr "Separer chaque mot cherché par un espace"
 #
 msgid "Show FindIt Icon"
-msgstr "Afficher l'icône du plug-in FindIt"
+msgstr "Afficher l'icône du complément FindIt"
 #
 msgid "Stowage PlugIn for OpenCPN"
-msgstr "Plug-in Gestionnaire d'organisation interne"
+msgstr "Complément \"Gestionnaire d'organisation interne\""
 #
 msgid "Stowage PlugIn for OpenCPN\n"
-msgstr "Plug-in Gestionnaire d'organisation interne\n"
+msgstr "Complément \"Gestionnaire d'organisation interne\"\n"
 #
 msgid "Text"
 msgstr "Texte"
@@ -113,6 +113,8 @@ msgstr "Oui"
 #
 msgid "blank"
 msgstr "Blanc"
+#
+#
 #
 #~ msgid "To Buy"
 #~ msgstr "A acheter"
