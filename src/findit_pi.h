@@ -42,7 +42,7 @@
 #define     MY_API_VERSION_MAJOR    1
 //#define     MY_API_VERSION_MINOR    5  // for OpenCPN 2.5
 #define     MY_API_VERSION_MINOR    6  // for OpenCPN 2.6.xxxx Beta
-#include "../../../include/ocpn_plugin.h"
+#include <opencpn/ocpn_plugin.h>
 #include "findit.h"
 
 class MainDialog;
@@ -77,7 +77,7 @@ public:
 	  void SetPluginMessage(wxString &message_id, wxString &message_body);
 	  void ShowPreferencesDialog( wxWindow* parent );
       void UpdateAuiStatus(void);
-      
+
 	  void SetDefaults(void);
 
 	  bool isLogbookReady;
