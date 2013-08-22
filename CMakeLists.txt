@@ -1,9 +1,9 @@
 ##---------------------------------------------------------------------------
 ## Author:      bdbcat aka. dsr (Dave Register)
-## Copyright:   
+## Copyright:
 ## License:     wxWidgets License
 ##---------------------------------------------------------------------------
- 
+
 
 # define minimum cmake version
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6.2)
@@ -18,6 +18,8 @@ PROJECT(findit_pi)
 
 SET(PACKAGE_NAME findit_pi)
 SET(PLUGIN_SOURCE_DIR .)
+SET(PREFIX_PLUGINS /usr/lib/opencpn)
+SET(PREFIX_DATA /usr/share)
 MESSAGE (STATUS "*** Building ${PACKAGE_NAME} ***")
 
 #SET(CMAKE_BUILD_TYPE Debug)
@@ -45,11 +47,12 @@ IF(WIN32)
     ADD_DEFINITIONS(-D_CRT_NONSTDC_NO_DEPRECATE -D_CRT_SECURE_NO_DEPRECATE)
 ENDIF(WIN32)
 
+FIND_PACKAGE(wxWidgets REQUIRED)
 INCLUDE(${wxWidgets_USE_FILE})
 
 FIND_PACKAGE(Gettext REQUIRED)
 
-# For convenience we define the sources as a variable. You can add 
+# For convenience we define the sources as a variable. You can add
 # header files and cpp/c files and CMake will sort them out
 
 SET(SRC_FINDIT
@@ -72,7 +75,7 @@ SET(SRC_FINDIT
 	src/tinyxml/tinyxml.h
 	src/tinyxml/tinystr.cpp
 	src/tinyxml/tinystr.h
-	src/tinyxml/tinyxmlerror.cpp	
+	src/tinyxml/tinyxmlerror.cpp
 	src/tinyxml/tinyxmlparser.cpp
  	)
 
@@ -99,7 +102,7 @@ IF(WIN32)
   INSTALL(TARGETS ${PACKAGE_NAME} RUNTIME DESTINATION "plugins")
 ENDIF(WIN32)
 
- 	  	 
+
 # find src/ -name \*.cpp -or -name \*.c -or -name \*.h -or -name \*.hpp >po/POTFILES.in
 FIND_PROGRAM(GETTEXT_XGETTEXT_EXECUTABLE xgettext)
 IF (GETTEXT_XGETTEXT_EXECUTABLE)
@@ -176,4 +179,4 @@ ENDIF(GETTEXT_MSGFMT_EXECUTABLE)
 
 
 
- 	  	 
+
